@@ -2,9 +2,11 @@ class Time{
     nome;
     curso;
     pontos;//esse atributo funciona para pontuação geral quando time está dentro do esporte e pontuação de jogo no jogo
+    avatar;
     constructor(nome,curso){
         this.nome=nome;
         this.curso=curso;
+        this.pontos=0;
     }
 }
 class Esporte{
@@ -33,12 +35,30 @@ class Jogo{
     constructor(time1,time2){
         this.times.push(time1);
         this.times.push(time2);
-        this.times[0].pontos=0;
-        this.times[1].pontos=0;
     }
     aumentaPontos(time){//time é um número 0 ou 1 informado no onclick do aumento de pontuação
         this.times[time].pontos++;
     }
+}
+function adiciona(){
+    let nome=document.querySelector("#nome").value;
+    let curso=document.querySelector("#curso").value;
+    let time= new Time(nome,curso);
+    if(document.querySelector("#basquete").checked){
+        basquete.adicionaTime(time);
+    }
+    if(document.querySelector("#volei").checked){
+        volei.adicionaTime(time);
+    }
+    if(document.querySelector("#futsal").checked){
+        futsal.adicionaTime(time);
+    }
+    console.log(time);
+    document.querySelector("#nome").value="";
+    document.querySelector("#curso").value="escolha";
+    document.querySelector("#futsal").checked=false;
+    document.querySelector("#volei").checked=false;
+    document.querySelector("#basquete").checked=false;
 }
 let volei= new Esporte("Volei");
 let futsal= new Esporte("Futsal");
