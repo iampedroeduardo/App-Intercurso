@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="inicio">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome">
+        <label for="curso">Curso:</label>
+        <select name="curso" id="curso">
+            <option value="tads">Análise e Desenvolvimento de Sistemas</option>
+            <option value="automacao">Automação Industrial</option>
+            <option value="enfermagem">Enfermagem</option>
+            <option value="eletro">Eletrotécnica</option>
+            <option value="engenharia">Engenharia Mecânica</option>
+            <option value="fabri">Fabricação Mecânica</option>
+            <option value="geo">Geoprocessamento</option>
+            <option value="info">Informática para Internet</option>
+            <option value="refri">Refrigeração e Climatização</option>
+        </select>
+        <input type="checkbox" id="basquete">
+        <label for="basquete">Basquete</label>
+        <input type="checkbox" id="futsal">
+        <label for="futsal">Futsal</label>
+        <input type="checkbox" id="volei">
+        <label for="volei">Vôlei</label>
+        <input type="button" onclick="Adiciona();">
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
