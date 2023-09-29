@@ -9,6 +9,7 @@ class Time{
         this.pontos=0;
     }
 }
+
 class Esporte{
     nome;
     times;
@@ -30,6 +31,7 @@ class Esporte{
         }
     };
 }
+
 class Jogo{
     times;
     constructor(time1,time2){
@@ -40,26 +42,38 @@ class Jogo{
         this.times[time].pontos++;
     }
 }
+
 function adiciona(){
-    let nome=document.querySelector("#nome").value;
-    let curso=document.querySelector("#curso").value;
-    let time= new Time(nome,curso);
-    if(document.querySelector("#basquete").checked){
-        basquete.adicionaTime(time);
+    if (
+        (document.querySelector("#nome").value != "") && 
+        (document.querySelector("#curso").value != "escolha") && (
+            (document.querySelector("#basquete").checked) || 
+            (document.querySelector("#volei").checked) ||
+            (document.querySelector("#futsal").checked)
+        )
+    )
+    {
+        let nome=document.querySelector("#nome").value;
+        let curso=document.querySelector("#curso").value;
+        let time= new Time(nome,curso);
+        if(document.querySelector("#basquete").checked){
+            basquete.adicionaTime(time);
+        }
+        if(document.querySelector("#volei").checked){
+            volei.adicionaTime(time);
+        }
+        if(document.querySelector("#futsal").checked){
+            futsal.adicionaTime(time);
+        }
+        console.log(time);
+        document.querySelector("#nome").value="";
+        document.querySelector("#curso").value="escolha";
+        document.querySelector("#futsal").checked=false;
+        document.querySelector("#volei").checked=false;
+        document.querySelector("#basquete").checked=false;
     }
-    if(document.querySelector("#volei").checked){
-        volei.adicionaTime(time);
-    }
-    if(document.querySelector("#futsal").checked){
-        futsal.adicionaTime(time);
-    }
-    console.log(time);
-    document.querySelector("#nome").value="";
-    document.querySelector("#curso").value="escolha";
-    document.querySelector("#futsal").checked=false;
-    document.querySelector("#volei").checked=false;
-    document.querySelector("#basquete").checked=false;
 }
+
 let volei= new Esporte("Volei");
 let futsal= new Esporte("Futsal");
 let basquete= new Esporte("Basquete");
