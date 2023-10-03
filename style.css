@@ -1,1 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Caveat&family=League+Gothic&family=Rubik+Wet+Paint&display=swap');
 
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  font-family: 'Bricolage Grotesque';
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+
+:root {
+  font-family: 'Bricolage Grotesque';
+  --amarelo: #f2e66e;
+  --amarelo-shade: #ecd351;
+  --azul: #5cc6d3;
+  --texto: #212529;
+  --fundo: #f0f9fa;
+}
+#root,
+#__next {
+  isolation: isolate;
+}
+
+body {
+  background-color: var(--fundo);
+  width: 100vw;
+  height: 100vh;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'hero card';
+  align-items: center;
+  place-items: center;
+}
+
+.hero {
+  width: 100%;
+  height: 100%;
+  background-image: url(img/bg-1200x271.png);
+  grid-area: hero;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid var(--texto);
+  background-position-x: right;
+}
+
+.hero img {
+  padding: 20px;
+  min-width: 450px;
+  width: 80%;
+}
+
+.card-inicial {
+  background-color: var(--azul);
+  border-radius: 16px;
+  border: 2px solid #212529;
+  display: flex;
+  justify-content: center;
+  height: 600px;
+  padding: 30px;
+  grid-area: card;
+}
+
+label {
+  font-size: 24px;
+}
+
+input, select {
+  height: 35px;
+}
+.card-conteudo {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+.foto-card {
+  width: 100%;
+  height: 260px;
+  background-color: var(--fundo);
+  border-radius: 16px;
+  border: 2px solid var(--texto);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.foto-card img {
+  width: 170px;
+}
+.botoes-esporte {
+  display: flex;
+  justify-content: space-between;
+}
+.round-border {
+  border-radius: 16px;
+  border: 2px solid #212529;
+}
+
+.botao-amarelo {
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: var(--texto);
+  --bs-btn-bg: var(--amarelo);
+  --bs-btn-border-color: var(--texto);
+  --bs-btn-hover-bg: var(--amarelo-shade);
+  --bs-btn-hover-border-color: var(--texto);
+  --bs-btn-active-color: var(--texto);
+  --bs-btn-active-bg: var(--amarelo);
+  --bs-btn-active-border-color: var(--texto);
+}
+
+#basquete {
+  width: 60px;
+
+}
+#botao-add {
+  height: 50px;
+}

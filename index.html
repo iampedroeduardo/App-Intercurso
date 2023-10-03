@@ -1,36 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intercurso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="inicio">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome">
-        <label for="curso">Curso:</label>
-        <select name="curso" id="curso">
-            <option value="escolha">Escolhe o curso</option>
-            <option value="tads">Análise e Desenvolvimento de Sistemas</option>
-            <option value="automacao">Automação Industrial</option>
-            <option value="enfermagem">Enfermagem</option>
-            <option value="eletro">Eletrotécnica</option>
-            <option value="engenharia">Engenharia Mecânica</option>
-            <option value="fabri">Fabricação Mecânica</option>
-            <option value="geo">Geoprocessamento</option>
-            <option value="info">Informática para Internet</option>
-            <option value="refri">Refrigeração e Climatização</option>
-        </select>
-        <input type="checkbox" id="basquete">
-        <label for="basquete">Basquete</label>
-        <input type="checkbox" id="futsal">
-        <label for="futsal">Futsal</label>
-        <input type="checkbox" id="volei">
-        <label for="volei">Vôlei</label>
-        <input type="button" onclick="adiciona();" value="Adicionar">
-    </div>
+    <main>
+
+        <div class="hero">
+            <img src="img/logo-web.png">
+        </div>
+        <div class="card-inicial">
+            <div class="card-conteudo">
+
+                <div class="foto-card">
+                    <img src="img/add-foto.png">
+                </div>
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" class="round-border">
+
+
+                <label for="curso">Curso:</label>
+                <select name="curso" id="curso" class="round-border">
+                    <option value="escolha">Escolhe o curso</option>
+                    <option value="tads">Análise e Desenvolvimento de Sistemas</option>
+                    <option value="automacao">Automação Industrial</option>
+                    <option value="enfermagem">Enfermagem</option>
+                    <option value="eletro">Eletrotécnica</option>
+                    <option value="engenharia">Engenharia Mecânica</option>
+                    <option value="fabri">Fabricação Mecânica</option>
+                    <option value="geo">Geoprocessamento</option>
+                    <option value="info">Informática para Internet</option>
+                    <option value="refri">Refrigeração e Climatização</option>
+                </select>
+
+                <div class="botoes-esporte">
+                    <input type="checkbox" id="basquete" class="round-border">
+
+                    <input type="checkbox" id="futsal" class="round-border">
+
+                    <input type="checkbox" id="volei" class="round-border">
+
+                </div>
+                <input type="button" onclick="adiciona();" value="ADICIONAR" id="botao-add"
+                    class="round-border btn botao-amarelo">
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
+
 </html>
