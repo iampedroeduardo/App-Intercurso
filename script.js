@@ -36,6 +36,7 @@ class Esporte{
 
 class Jogo{
     times;
+    vencedor;
     constructor(time1,time2){
         this.times = [];
         this.times.push(time1);
@@ -46,6 +47,29 @@ class Jogo{
     }
 }
 
+function vencer(esporte,jogo,resultado){
+    if(esporte=="volei"){
+        volei.jogos[jogo].vencedor = resultado;
+        let botao1 = document.querySelector("#btn-volei-"+jogo+"-0");
+        botao1.remove();
+        let botao2 = document.querySelector("#btn-volei-"+jogo+"-1");
+        botao2.remove();
+    }
+    else if(esporte=="basquete"){
+        basquete.jogos[jogo].vencedor = resultado;
+        let botao1 = document.querySelector("#btn-basquete-"+jogo+"-0");
+        botao1.remove();
+        let botao2 = document.querySelector("#btn-basquete-"+jogo+"-1");
+        botao2.remove();
+    }
+    else if(esporte=="futsal"){
+        futsal.jogos[jogo].vencedor = resultado;
+        let botao1 = document.querySelector("#btn-futsal-"+jogo+"-0");
+        botao1.remove();
+        let botao2 = document.querySelector("#btn-futsal-"+jogo+"-1");
+        botao2.remove();
+    }
+}
 function adiciona(){
     if (
         (document.querySelector("#nome").value != "") && 
@@ -111,6 +135,17 @@ function comeca(){
                 let time_nome_1 = basquete.jogos[i].times[0].nome;
                 let time_nome_2 = basquete.jogos[i].times[1].nome;
 
+                let button1 = document.createElement("input");
+                let button2 = document.createElement("input");
+                button1.type = "button";
+                button2.type = "button";
+                button1.id = "btn-basquete-"+i+"-0";
+                button2.id = "btn-basquete-"+i+"-1";
+                button1.setAttribute("class","vencer");
+                button2.setAttribute("class","vencer");
+                button1.setAttribute("onclick","vencer('basquete',"+i+",basquete.jogos["+i+"].times[0].nome)");
+                button2.setAttribute("onclick","vencer('basquete',"+i+",basquete.jogos["+i+"].times[1].nome)");
+
                 let n1 = document.createElement("h3");
                 let n2 = document.createElement("h3");
 
@@ -119,7 +154,9 @@ function comeca(){
                 n1.innerHTML = time_nome_1;
                 n2.innerHTML = time_nome_2;
                 div.appendChild(n1);
+                div.appendChild(button1);
                 div.appendChild(n2);
+                div.appendChild(button2);
                 conteudo.appendChild(div);
             }
         }
@@ -138,6 +175,17 @@ function comeca(){
                 let div = document.createElement("div");
                 let time_nome_1 = futsal.jogos[i].times[0].nome;
                 let time_nome_2 = futsal.jogos[i].times[1].nome;
+
+                let button1 = document.createElement("input");
+                let button2 = document.createElement("input");
+                button1.type = "button";
+                button2.type = "button";
+                button1.id = "btn-volei-"+i+"-0";
+                button2.id = "btn-volei-"+i+"-1";
+                button1.setAttribute("class","vencer");
+                button2.setAttribute("class","vencer");
+                button1.setAttribute("onclick","vencer('futsal',"+i+",futsal.jogos["+i+"].times[0].nome)");
+                button2.setAttribute("onclick","vencer('futsal',"+i+",futsal.jogos["+i+"].times[1].nome)");
 
                 let n1 = document.createElement("h3");
                 let n2 = document.createElement("h3");
@@ -166,6 +214,17 @@ function comeca(){
                 let div = document.createElement("div");
                 let time_nome_1 = volei.jogos[i].times[0].nome;
                 let time_nome_2 = volei.jogos[i].times[1].nome;
+
+                let button1 = document.createElement("input");
+                let button2 = document.createElement("input");
+                button1.type = "button";
+                button2.type = "button";
+                button1.id = "btn-futsal-"+i+"-0";
+                button2.id = "btn-futsal-"+i+"-1";
+                button1.setAttribute("class","vencer");
+                button2.setAttribute("class","vencer");
+                button1.setAttribute("onclick","vencer('volei',"+i+",volei.jogos["+i+"].times[0].nome)");
+                button2.setAttribute("onclick","vencer('volei',"+i+",volei.jogos["+i+"].times[1].nome)");
 
                 let n1 = document.createElement("h3");
                 let n2 = document.createElement("h3");
