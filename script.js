@@ -47,6 +47,32 @@ class Jogo{
     }
 }
 
+function pontos(nome, esporte) {
+    if (esporte == "volei") {
+        for (let i = 0; i < volei.times.length; i++) {
+            if (volei.times[i].nome == nome){
+                volei.times[i].pontos += 1;
+            }
+        }
+    }
+
+    if (esporte == "futsal") {
+        for(let i=0;i<futsal.times.length;i++){
+            if(futsal.times[i].nome == nome){
+                futsal.times[i].pontos++;
+            }
+        }
+    }
+
+    if (esporte == "basquete") {
+        for(let i=0;i<basquete.times.length;i++){
+            if(basquete.times[i].nome == nome){
+                basquete.times[i].pontos++;
+            }
+        }
+    }
+}
+
 function vencer(esporte,jogo,resultado){
     if(esporte=="volei"){
         volei.jogos[jogo].vencedor = resultado;
@@ -54,6 +80,16 @@ function vencer(esporte,jogo,resultado){
         botao1.remove();
         let botao2 = document.querySelector("#btn-volei-"+jogo+"-1");
         botao2.remove();
+        let div = document.querySelector("#jogo-volei-" + (jogo+1));
+        if(resultado == volei.jogos[jogo].times[0].nome){
+            div.firstChild.firstChild.setAttribute("class","vencedor");
+            div.lastChild.firstChild.setAttribute("class","perdedor");
+        }
+        else{
+            div.lastChild.firstChild.setAttribute("class","vencedor");
+            div.firstChild.firstChild.setAttribute("class","perdedor");
+        }
+        pontos(resultado,esporte);
     }
     else if(esporte=="basquete"){
         basquete.jogos[jogo].vencedor = resultado;
@@ -61,6 +97,16 @@ function vencer(esporte,jogo,resultado){
         botao1.remove();
         let botao2 = document.querySelector("#btn-basquete-"+jogo+"-1");
         botao2.remove();
+        let div = document.querySelector("#jogo-basquete-" + (jogo+1));
+        if(resultado == basquete.jogos[jogo].times[0].nome){
+            div.firstChild.firstChild.setAttribute("class","vencedor");
+            div.lastChild.firstChild.setAttribute("class","perdedor");
+        }
+        else{
+            div.lastChild.firstChild.setAttribute("class","vencedor");
+            div.firstChild.firstChild.setAttribute("class","perdedor");
+        }
+        pontos(resultado,esporte);
     }
     else if(esporte=="futsal"){
         futsal.jogos[jogo].vencedor = resultado;
@@ -68,8 +114,46 @@ function vencer(esporte,jogo,resultado){
         botao1.remove();
         let botao2 = document.querySelector("#btn-futsal-"+jogo+"-1");
         botao2.remove();
+        let div = document.querySelector("#jogo-futsal-" + (jogo+1));
+        if(resultado == futsal.jogos[jogo].times[0].nome){
+            div.firstChild.firstChild.setAttribute("class","vencedor");
+            div.lastChild.firstChild.setAttribute("class","perdedor");
+        }
+        else{
+            div.lastChild.firstChild.setAttribute("class","vencedor");
+            div.firstChild.firstChild.setAttribute("class","perdedor");
+        }
+        pontos(resultado,esporte);
     }
 }
+
+// function criaTabela() {
+//     if (basquete.times.length != 0) {
+//         let div = document.querySelector("#basquete-div-tab");
+
+//     }
+// }
+
+function checaNome(nome){
+    tof = true;
+    for(let i=0;i<basquete.times.length;i++){
+        if(basquete.times[i].nome == nome){
+            tof = false;
+        }
+    }
+    for(let i=0;i<volei.times.length;i++){
+        if(volei.times[i].nome == nome){
+            tof = false;
+        }
+    }
+    for(let i=0;i<futsal.times.length;i++){
+        if(futsal.times[i].nome == nome){
+            tof = false;
+        }
+    }
+    return tof;
+}
+
 function adiciona(){
     if (
         (document.querySelector("#nome").value != "") && 
@@ -77,7 +161,7 @@ function adiciona(){
             (document.querySelector("#basquete").checked) || 
             (document.querySelector("#volei").checked) ||
             (document.querySelector("#futsal").checked)
-        )
+        ) && checaNome(document.querySelector("#nome").value)
     )
     {
         let nome=document.querySelector("#nome").value;
@@ -100,8 +184,20 @@ function adiciona(){
         document.querySelector("#basquete").checked=false;
     }
 
-    else {
+    else if(
+        (document.querySelector("#nome").value == "") || 
+        (document.querySelector("#curso").value == "escolha") || 
+        (
+            (!document.querySelector("#basquete").checked) && 
+            (!document.querySelector("#volei").checked) &&
+            (!document.querySelector("#futsal").checked)
+        )
+    ){
         alert("Preencha todos os dados")
+    }
+
+    else if(!checaNome(document.querySelector("#nome").value)){
+        alert("Você já cadastrou um time com esse nome!");
     }
 }
 
@@ -132,6 +228,8 @@ function comeca(){
 
             for (let i=0; i < basquete.jogos.length; i++) {
                 let div = document.createElement("div");
+                let div_time_1 = document.createElement("div");
+                let div_time_2 = document.createElement("div");
                 let time_nome_1 = basquete.jogos[i].times[0].nome;
                 let time_nome_2 = basquete.jogos[i].times[1].nome;
 
@@ -139,6 +237,8 @@ function comeca(){
                 let button2 = document.createElement("input");
                 button1.type = "button";
                 button2.type = "button";
+                button1.value = "Vencer";
+                button2.value = "Vencer";
                 button1.id = "btn-basquete-"+i+"-0";
                 button2.id = "btn-basquete-"+i+"-1";
                 button1.setAttribute("class","vencer");
@@ -148,15 +248,23 @@ function comeca(){
 
                 let n1 = document.createElement("h3");
                 let n2 = document.createElement("h3");
+                let x = document.createElement("h2");
 
-                div.setAttribute("id", "jogo-basquete-" + (i+1))
+                div_time_1.setAttribute("class","time");
+                div_time_2.setAttribute("class","time");
+                div.setAttribute("id", "jogo-basquete-" + (i+1));
+                div.setAttribute("class","jogo");
 
                 n1.innerHTML = time_nome_1;
                 n2.innerHTML = time_nome_2;
-                div.appendChild(n1);
-                div.appendChild(button1);
-                div.appendChild(n2);
-                div.appendChild(button2);
+                x.innerHTML = "X";
+                div_time_1.appendChild(n1);
+                div_time_1.appendChild(button1);
+                div_time_2.appendChild(n2);
+                div_time_2.appendChild(button2);
+                div.appendChild(div_time_1);
+                div.appendChild(x);
+                div.appendChild(div_time_2);
                 conteudo.appendChild(div);
             }
         }
@@ -173,6 +281,8 @@ function comeca(){
 
             for (let i=0; i < futsal.jogos.length; i++) {
                 let div = document.createElement("div");
+                let div_time_1 = document.createElement("div");
+                let div_time_2 = document.createElement("div");
                 let time_nome_1 = futsal.jogos[i].times[0].nome;
                 let time_nome_2 = futsal.jogos[i].times[1].nome;
 
@@ -180,8 +290,10 @@ function comeca(){
                 let button2 = document.createElement("input");
                 button1.type = "button";
                 button2.type = "button";
-                button1.id = "btn-volei-"+i+"-0";
-                button2.id = "btn-volei-"+i+"-1";
+                button1.value = "Vencer";
+                button2.value = "Vencer";
+                button1.id = "btn-futsal-"+i+"-0";
+                button2.id = "btn-futsal-"+i+"-1";
                 button1.setAttribute("class","vencer");
                 button2.setAttribute("class","vencer");
                 button1.setAttribute("onclick","vencer('futsal',"+i+",futsal.jogos["+i+"].times[0].nome)");
@@ -189,13 +301,23 @@ function comeca(){
 
                 let n1 = document.createElement("h3");
                 let n2 = document.createElement("h3");
+                let x = document.createElement("h2");
 
-                div.setAttribute("id", "jogo-futsal-" + (i+1))
+                div_time_1.setAttribute("class","time");
+                div_time_2.setAttribute("class","time");
+                div.setAttribute("id", "jogo-futsal-" + (i+1));
+                div.setAttribute("class","jogo");
 
                 n1.innerHTML = time_nome_1;
                 n2.innerHTML = time_nome_2;
-                div.appendChild(n1);
-                div.appendChild(n2);
+                x.innerHTML = "X";
+                div_time_1.appendChild(n1);
+                div_time_1.appendChild(button1);
+                div_time_2.appendChild(n2);
+                div_time_2.appendChild(button2);
+                div.appendChild(div_time_1);
+                div.appendChild(x);
+                div.appendChild(div_time_2);
                 conteudo.appendChild(div);
             }
         }
@@ -212,6 +334,8 @@ function comeca(){
 
             for (let i=0; i < volei.jogos.length; i++) {
                 let div = document.createElement("div");
+                let div_time_1 = document.createElement("div");
+                let div_time_2 = document.createElement("div");
                 let time_nome_1 = volei.jogos[i].times[0].nome;
                 let time_nome_2 = volei.jogos[i].times[1].nome;
 
@@ -219,8 +343,10 @@ function comeca(){
                 let button2 = document.createElement("input");
                 button1.type = "button";
                 button2.type = "button";
-                button1.id = "btn-futsal-"+i+"-0";
-                button2.id = "btn-futsal-"+i+"-1";
+                button1.value = "Vencer";
+                button2.value = "Vencer";
+                button1.id = "btn-volei-"+i+"-0";
+                button2.id = "btn-volei-"+i+"-1";
                 button1.setAttribute("class","vencer");
                 button2.setAttribute("class","vencer");
                 button1.setAttribute("onclick","vencer('volei',"+i+",volei.jogos["+i+"].times[0].nome)");
@@ -228,13 +354,23 @@ function comeca(){
 
                 let n1 = document.createElement("h3");
                 let n2 = document.createElement("h3");
+                let x = document.createElement("h2");
 
-                div.setAttribute("id", "jogo-volei-" + (i+1))
+                div_time_1.setAttribute("class","time");
+                div_time_2.setAttribute("class","time");
+                div.setAttribute("id", "jogo-volei-" + (i+1));
+                div.setAttribute("class","jogo");
 
                 n1.innerHTML = time_nome_1;
                 n2.innerHTML = time_nome_2;
-                div.appendChild(n1);
-                div.appendChild(n2);
+                x.innerHTML = "X";
+                div_time_1.appendChild(n1);
+                div_time_1.appendChild(button1);
+                div_time_2.appendChild(n2);
+                div_time_2.appendChild(button2);
+                div.appendChild(div_time_1);
+                div.appendChild(x);
+                div.appendChild(div_time_2);
                 conteudo.appendChild(div);
             }
         }
@@ -248,7 +384,7 @@ function comeca(){
     }
 }
 
-// Funções das Modalidades
+// Funções das Modalidades Jogos
 
 function Basquete() {
     document.getElementById("basquete-div").style = "";
@@ -266,6 +402,38 @@ function Volei() {
     document.getElementById("volei-div").style = "";
     document.getElementById("basquete-div").style = "display: none;";
     document.getElementById("futsal-div").style = "display: none;";
+}
+
+// Funções das Modalidades Tabelas
+
+function BasqueteTab() {
+    document.getElementById("basquete-div-tab").style = "";
+    document.getElementById("futsal-div-tab").style = "display: none;";
+    document.getElementById("volei-div-tab").style = "display: none;";
+}
+
+function FutsalTab() {
+    document.getElementById("futsal-div-tab").style = "";
+    document.getElementById("basquete-div-tab").style = "display: none;";
+    document.getElementById("volei-div-tab").style = "display: none;";
+}
+
+function VoleiTab() {
+    document.getElementById("volei-div-tab").style = "";
+    document.getElementById("basquete-div-tab").style = "display: none;";
+    document.getElementById("futsal-div-tab").style = "display: none;";
+}
+
+// Troca de Página
+
+function ranking(){
+    document.querySelector("#jogos").style.display = "none";
+    document.querySelector("#tabelas").style.display = "";    
+}
+
+function jogos(){
+    document.querySelector("#jogos").style.display = "";
+    document.querySelector("#tabelas").style.display = "none";    
 }
 
 let volei= new Esporte("Volei");
