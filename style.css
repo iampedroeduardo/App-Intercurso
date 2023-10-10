@@ -231,3 +231,23 @@ select {
 .btn-check+.btn:hover {
     border-color: var(--texto);
 }
+.jogo {
+  border: 2px black solid;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.time {
+  margin: 20px;
+}
+
+.vencedor {
+  color: green;
+}
+
+.perdedor {
+  color: red;
+}
