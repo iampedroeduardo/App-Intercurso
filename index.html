@@ -82,7 +82,8 @@
             <button class="btn round-border volei" onclick="Volei()">
                 <img src="img/volei.png">
             </button>
-
+            <input type="button" onclick="ranking();" value="RANKING" id="botao-add"
+                    class="round-border btn botao-amarelo">
         </div>
 
         <div id="basquete-div">
@@ -98,6 +99,37 @@
         </div>
     </main>
     
+    <main id="tabelas" style="display: none;">
+        <div class="botoes-esporte">
+
+            <button class="btn round-border basquete" onclick="BasqueteTab()">
+                <img src="img/basquete.png">
+            </button>
+
+            <button class="btn round-border futsal" onclick="FutsalTab()">
+                <img src="img/futsal.png">
+            </button>
+
+            <button class="btn round-border volei" onclick="VoleiTab()">
+                <img src="img/volei.png">
+            </button>
+            <input type="button" onclick="jogos();" value="JOGOS" id="botao-add"
+                    class="round-border btn botao-amarelo">
+        </div>
+
+        <div id="basquete-div-tab">
+
+        </div>
+
+        <div id="futsal-div-tab" style="display: none;">
+
+        </div>
+
+        <div id="volei-div-tab" style="display: none;">
+
+        </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 
