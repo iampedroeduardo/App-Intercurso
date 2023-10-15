@@ -65,11 +65,15 @@ function pontos(nome, esporte) {
     }
 
     if (esporte == "basquete") {
+        let time;
         for(let i=0;i<basquete.times.length;i++){
             if(basquete.times[i].nome == nome){
                 basquete.times[i].pontos++;
+                time = basquete.times[i];
+                basquete.times.splice(i,1);
             }
         }
+        basquete.times = ordenaTimes(basquete,time);
     }
 }
 
@@ -127,12 +131,107 @@ function vencer(esporte,jogo,resultado){
     }
 }
 
-// function criaTabela() {
-//     if (basquete.times.length != 0) {
-//         let div = document.querySelector("#basquete-div-tab");
+function ordenaTimes(esporte){
+    let copia = esporte.times;
+    let times_class = [];
+    let posicao = 0;
+    console.log(esporte.times.length);
+    console.log(copia);
+    for(let i=0; i<esporte.times.length; i++){
+        let time = copia[0];
+        let posicao = 0;
+        for(let c=0; c<copia.length; c++){
+            if (copia[c].pontos > time.pontos){
+                time = copia[c];
+                posicao = c;
+            }
+        }
+        times_class.push(time);
+        copia.splice(posicao,1);
+        console.log(i);
+    }
+    return times_class;
+}
 
-//     }
-// }
+function ordenaTimes(esporte, time){
+    let posicao = -1;
+    for(let i=0;i<esporte.times.length;i++){
+        if(esporte.times[i].pontos>time.pontos){
+            posicao = i;
+        }
+    }
+    esporte.times.splice(posicao+1,0,time);
+    return esporte.times; 
+}
+
+function criaTabelas() {
+
+    if (basquete.times.length != 0) {
+        let div = document.querySelector("#basquete-div-tab");
+        div.innerHTML = `<table class = "tabela" id = "tab-basquete">
+            <tr>
+                <th colspan = 3>Basquete</th>
+            </tr>
+            <tr>
+                <th>Classificação</th>
+                <th>Times</th>
+                <th>Pontos</th>
+            </tr>
+        </table>`
+        let posicao;
+        for(let i = 0; i<basquete.times.length; i++){
+            let tabela = document.querySelector("#tab-basquete");
+            let tr = document.createElement("tr");
+            let td_class = document.createElement("td");
+            let td_times = document.createElement("td");
+            let td_pontos = document.createElement("td");
+            if(i>0){
+                if(basquete.times[i].pontos == basquete.times[i-1].pontos){
+                    td_class.innerHTML = posicao;
+                } 
+                else{
+                    posicao = i+1;
+                    td_class.innerHTML = posicao;
+                }
+            }
+            else{
+                posicao = i+1;
+                td_class.innerHTML = posicao;
+            }
+            
+            td_times.innerHTML = basquete.times[i].nome;
+            td_pontos.innerHTML = basquete.times[i].pontos;
+
+            tr.appendChild(td_class);
+            tr.appendChild(td_times);
+            tr.appendChild(td_pontos);
+            tabela.appendChild(tr);
+        }
+    }
+    else{
+        let div = document.querySelector("#basquete-div-tab");
+        div.innerHTML = "<h2> Não houve jogos desta modalidade </h2>"
+    }
+
+    if (futsal.times.length != 0) {
+        let div = document.querySelector("#futsal-div-tab");
+
+
+    }
+    else{
+        let div = document.querySelector("#futsal-div-tab");
+        div.innerHTML = "<h2> Não houve jogos desta modalidade </h2>"
+    }
+
+    if (volei.times.length != 0) {
+        let div = document.querySelector("#volei-div-tab");
+
+    }
+    else {
+        let div = document.querySelector("#volei-div-tab");
+        div.innerHTML = "<h2> Não houve jogos desta modalidade </h2>"
+    }
+}
 
 function checaNome(nome){
     tof = true;
@@ -227,45 +326,86 @@ function comeca(){
             let conteudo = document.getElementById("basquete-div");
 
             for (let i=0; i < basquete.jogos.length; i++) {
-                let div = document.createElement("div");
-                let div_time_1 = document.createElement("div");
-                let div_time_2 = document.createElement("div");
-                let time_nome_1 = basquete.jogos[i].times[0].nome;
-                let time_nome_2 = basquete.jogos[i].times[1].nome;
+                if(vencedor == undefined){
+                    let div = document.createElement("div");
+                    let div_time_1 = document.createElement("div");
+                    let div_time_2 = document.createElement("div");
+                    let time_nome_1 = basquete.jogos[i].times[0].nome;
+                    let time_nome_2 = basquete.jogos[i].times[1].nome;
 
-                let button1 = document.createElement("input");
-                let button2 = document.createElement("input");
-                button1.type = "button";
-                button2.type = "button";
-                button1.value = "Vencer";
-                button2.value = "Vencer";
-                button1.id = "btn-basquete-"+i+"-0";
-                button2.id = "btn-basquete-"+i+"-1";
-                button1.setAttribute("class","vencer");
-                button2.setAttribute("class","vencer");
-                button1.setAttribute("onclick","vencer('basquete',"+i+",basquete.jogos["+i+"].times[0].nome)");
-                button2.setAttribute("onclick","vencer('basquete',"+i+",basquete.jogos["+i+"].times[1].nome)");
+                    let button1 = document.createElement("input");
+                    let button2 = document.createElement("input");
+                    button1.type = "button";
+                    button2.type = "button";
+                    button1.value = "Vencer";
+                    button2.value = "Vencer";
+                    button1.id = "btn-basquete-"+i+"-0";
+                    button2.id = "btn-basquete-"+i+"-1";
+                    button1.setAttribute("class","vencer");
+                    button2.setAttribute("class","vencer");
+                    button1.setAttribute("onclick","vencer('basquete',"+i+",basquete.jogos["+i+"].times[0].nome)");
+                    button2.setAttribute("onclick","vencer('basquete',"+i+",basquete.jogos["+i+"].times[1].nome)");
 
-                let n1 = document.createElement("h3");
-                let n2 = document.createElement("h3");
-                let x = document.createElement("h2");
+                    let n1 = document.createElement("h3");
+                    let n2 = document.createElement("h3");
+                    let x = document.createElement("h2");
 
-                div_time_1.setAttribute("class","time");
-                div_time_2.setAttribute("class","time");
-                div.setAttribute("id", "jogo-basquete-" + (i+1));
-                div.setAttribute("class","jogo");
+                    div_time_1.setAttribute("class","time");
+                    div_time_2.setAttribute("class","time");
+                    div.setAttribute("id", "jogo-basquete-" + (i+1));
+                    div.setAttribute("class","jogo");
 
-                n1.innerHTML = time_nome_1;
-                n2.innerHTML = time_nome_2;
-                x.innerHTML = "X";
-                div_time_1.appendChild(n1);
-                div_time_1.appendChild(button1);
-                div_time_2.appendChild(n2);
-                div_time_2.appendChild(button2);
-                div.appendChild(div_time_1);
-                div.appendChild(x);
-                div.appendChild(div_time_2);
-                conteudo.appendChild(div);
+                    n1.innerHTML = time_nome_1;
+                    n2.innerHTML = time_nome_2;
+                    x.innerHTML = "VS";
+                    div_time_1.appendChild(n1);
+                    div_time_1.appendChild(button1);
+                    div_time_2.appendChild(n2);
+                    div_time_2.appendChild(button2);
+                    div.appendChild(div_time_1);
+                    div.appendChild(x);
+                    div.appendChild(div_time_2);
+                    conteudo.appendChild(div);
+                }
+
+                else {
+                    let div = document.createElement("div");
+                    let div_time_1 = document.createElement("div");
+                    let div_time_2 = document.createElement("div");
+                    let time_nome_1 = basquete.jogos[i].times[0].nome;
+                    let time_nome_2 = basquete.jogos[i].times[1].nome;
+
+                    let n1 = document.createElement("h3");
+                    let n2 = document.createElement("h3");
+                    let x = document.createElement("h2");
+
+                    div_time_1.setAttribute("class","time");
+                    div_time_2.setAttribute("class","time");
+                    div.setAttribute("id", "jogo-basquete-" + (i+1));
+                    div.setAttribute("class","jogo");
+
+                    if(vencedor == basquete.jogos[i].times[0].nome) {
+                        n1.setAttribute("class", "vencedor");
+                        n2.setAttribute("class", "perdedor");
+                    }
+
+                    else {
+                        n1.setAttribute("class", "vencedor");
+                        n2.setAttribute("class", "perdedor");
+                    }
+
+                    n1.innerHTML = time_nome_1;
+                    n2.innerHTML = time_nome_2;
+                    x.innerHTML = "VS";
+                    div_time_1.appendChild(n1);
+                    div_time_1.appendChild(button1);
+                    div_time_2.appendChild(n2);
+                    div_time_2.appendChild(button2);
+                    div.appendChild(div_time_1);
+                    div.appendChild(x);
+                    div.appendChild(div_time_2);
+                    conteudo.appendChild(div);
+                }
             }
         }
 
@@ -310,7 +450,7 @@ function comeca(){
 
                 n1.innerHTML = time_nome_1;
                 n2.innerHTML = time_nome_2;
-                x.innerHTML = "X";
+                x.innerHTML = "VS";
                 div_time_1.appendChild(n1);
                 div_time_1.appendChild(button1);
                 div_time_2.appendChild(n2);
@@ -429,6 +569,7 @@ function VoleiTab() {
 function ranking(){
     document.querySelector("#jogos").style.display = "none";
     document.querySelector("#tabelas").style.display = "";    
+    criaTabelas();
 }
 
 function jogos(){
@@ -443,9 +584,13 @@ let basquete= new Esporte("Basquete");
 //Teste
 let team1 = new Time("time 1", "Fabricação Mecânica");
 let team2 = new Time("time 2", "Informática para a Internet");
+let team3 = new Time("time 3", "Fabricação Mecânica");
+let team4 = new Time("time 4", "Informática para a Internet");
 
 basquete.adicionaTime(team1);
 basquete.adicionaTime(team2);
+basquete.adicionaTime(team3);
+basquete.adicionaTime(team4);
 // Fim Teste
 
 // LOCAL STORAGE

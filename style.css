@@ -305,3 +305,6 @@ select:hover {
 .jogos {
   grid-area: jogos;
 }
+.tabela, tr, th, td {
+  border: 2px solid black;
+}

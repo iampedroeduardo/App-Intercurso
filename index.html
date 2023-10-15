@@ -29,7 +29,7 @@
 
                 <label for="curso">Curso:</label>
                 <select name="curso" id="curso" class="round-border">
-                    <option value="escolha">Escolhe o curso</option>
+                    <option value="escolha" disable selected hidden>Escolhe o curso</option>
                     <option value="tads">Análise e Desenvolvimento de Sistemas</option>
                     <option value="automacao">Automação Industrial</option>
                     <option value="enfermagem">Enfermagem</option>
@@ -62,6 +62,9 @@
                     class="round-border btn botao-amarelo"> <br>
 
                     <input type="button" onclick="comeca();" value="COMEÇAR"
+                    class=" round-border btn botao-amarelo">
+                    
+                    <input type="button" onclick="carrega();" value="CARREGAR"
                     class=" round-border btn botao-amarelo">
             </div>
         </div>
