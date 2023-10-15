@@ -363,7 +363,7 @@ function comeca(){
 
                 n1.innerHTML = time_nome_1;
                 n2.innerHTML = time_nome_2;
-                x.innerHTML = "X";
+                x.innerHTML = "VS";
                 div_time_1.appendChild(n1);
                 div_time_1.appendChild(button1);
                 div_time_2.appendChild(n2);
