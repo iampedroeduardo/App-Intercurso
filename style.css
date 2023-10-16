@@ -95,10 +95,12 @@ main {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: 'hero card';
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    'hero card'
+    'hero botoes';
+
   place-items: center;
 }
 
@@ -121,17 +123,27 @@ main {
 }
 
 .card-inicial {
-  margin: 15px;
   background-color: var(--azul);
   border-radius: 16px;
   border: 2px solid #212529;
   display: flex;
   justify-content: center;
-  height: 600px;
+  height: 550px;
   padding: 30px;
   grid-area: card;
 }
 
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  width: 334px;
+  padding-bottom: 15px;
+  grid-area: botoes;
+}
+.botoes .btn {
+  height: 50px;
+  width: 160px;
+}
 label {
   font-size: 24px;
 }
@@ -157,11 +169,10 @@ select {
 }
 .foto-card {
   width: 100%;
-  height: 260px;
+  height: 270px;
   background-color: var(--fundo);
   border-radius: 16px;
   border: 2px solid var(--texto);
-  margin-bottom: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,6 +207,19 @@ select:hover {
   --bs-btn-active-border-color: var(--texto);
 }
 
+.botao-laranja {
+  height: 45px;
+  --bs-btn-font-weight: bold;
+  --bs-btn-color: var(--texto);
+  --bs-btn-bg: var(--laranja);
+  --bs-btn-border-color: var(--texto);
+  --bs-btn-hover-bg: var(--laranja-shade);
+  --bs-btn-hover-border-color: var(--texto);
+  --bs-btn-active-color: var(--texto);
+  --bs-btn-active-bg: var(--laranja);
+  --bs-btn-active-border-color: var(--texto);
+}
+
 .botoes-esporte label {
   width: 60px;
   height: 40px;
@@ -203,30 +227,31 @@ select:hover {
 
 .basquete {
   height: 45px;
-  background-color: var(--laranja);
+  background-color: var(--laranja-shade-escuro);
   border-color: var(--texto);
-  --bs-btn-active-bg: var(--laranja-shade-escuro);
+  --bs-btn-active-bg: var(--laranja);
 }
 .basquete:hover {
-  background-color: var(--laranja-shade) !important;
+  background-color: var(--laranja) !important;
   border-color: var(--texto);
 }
 .futsal {
   height: 45px;
-  background-color: var(--azul-claro);
-  --bs-btn-active-bg: var(--azul-claro-shade-escuro);
+  background-color: var(--azul-claro-shade-escuro);
+  --bs-btn-active-bg: var(--azul-claro);
 }
 .futsal:hover {
-  background-color: var(--azul-claro-shade) !important;
+  background-color: var(--azul-claro) !important;
   border-color: var(--texto);
 }
 .volei {
   height: 45px;
-  background-color: var(--amarelo);
-  --bs-btn-active-bg: var(--amarelo-shade-escuro);
+  background-color: var(--amarelo-shade-escuro);
+  --bs-btn-active-bg: var(--amarelo);
 }
+
 .volei:hover {
-  background-color: var(--amarelo-shade) !important;
+  background-color: var(--amarelo) !important;
   border-color: var(--texto);
 }
 
@@ -247,7 +272,6 @@ select:hover {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 20px;
 }
 
 .vencer {
@@ -290,6 +314,7 @@ select:hover {
     'header'
     'menu'
     'jogos';
+  overflow-x: hidden;
 }
 
 .header {
@@ -320,7 +345,21 @@ select:hover {
 }
 
 .jogos {
+  margin-top: 20px;
+  width: 100%;
   grid-area: jogos;
+  display: flex;
+  justify-content: center;
+}
+
+#basquete-div,
+#futsal-div,
+#volei-div {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 .tabela,
 tr,
