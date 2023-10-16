@@ -86,7 +86,7 @@ h6 {
 }
 
 body {
-  background-color: var(--fundo);
+  background-image: url(./img/padrao.png);
   width: 100vw;
   height: 100vh;
 }
@@ -202,6 +202,7 @@ select:hover {
 }
 
 .basquete {
+  height: 45px;
   background-color: var(--laranja);
   border-color: var(--texto);
   --bs-btn-active-bg: var(--laranja-shade-escuro);
@@ -211,6 +212,7 @@ select:hover {
   border-color: var(--texto);
 }
 .futsal {
+  height: 45px;
   background-color: var(--azul-claro);
   --bs-btn-active-bg: var(--azul-claro-shade-escuro);
 }
@@ -219,6 +221,7 @@ select:hover {
   border-color: var(--texto);
 }
 .volei {
+  height: 45px;
   background-color: var(--amarelo);
   --bs-btn-active-bg: var(--amarelo-shade-escuro);
 }
@@ -290,6 +293,9 @@ select:hover {
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   grid-area: header;
   background-image: url(./img/bg.png);
   height: 100%;
@@ -298,13 +304,27 @@ select:hover {
   background-size: contain;
   border-bottom: 2px var(--texto) solid;
 }
-#jogos .botoes-esporte {
+.header img {
+  height: 80%;
+}
+#jogos .botoes-esporte,
+#tabelas .botoes-esporte {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
   background-color: var(--fundo-laranja);
+  border-bottom: 2px var(--texto) solid;
   grid-area: menu;
 }
+
 .jogos {
   grid-area: jogos;
 }
-.tabela, tr, th, td {
+.tabela,
+tr,
+th,
+td {
   border: 2px solid black;
 }
