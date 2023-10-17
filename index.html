@@ -30,7 +30,7 @@
 
                 <label for="curso">Curso:</label>
                 <select name="curso" id="curso" class="round-border">
-                    <option value="escolha" disable selected hidden>Escolhe o curso</option>
+                    <option value="escolha" selected hidden>Escolhe o curso</option>
                     <option value="Análise e Desenvolvimento de Sistemas">Análise e Desenvolvimento de Sistemas</option>
                     <option value="Automação Industrial">Automação Industrial</option>
                     <option value="Enfermagem">Enfermagem</option>
@@ -44,17 +44,17 @@
 
                 <div class="botoes-esporte">
                     <input type="checkbox" id="basquete" class="btn-check">
-                    <label class="btn round-border basquete" for="basquete">
+                    <label class="round-border basquete" for="basquete">
                         <img src="img/basquete.png">
                     </label>
 
                     <input type="checkbox" id="futsal" class="btn-check">
-                    <label class="btn round-border futsal" for="futsal">
+                    <label class="round-border futsal" for="futsal">
                         <img src="img/futsal.png">
                     </label>
 
                     <input type="checkbox" id="volei" class="btn-check">
-                    <label class="btn round-border volei" for="volei">
+                    <label class="round-border volei" for="volei">
                         <img src="img/volei.png">
                     </label>
 
@@ -80,15 +80,15 @@
         </div>
         <div class="botoes-esporte">
 
-            <button class="btn round-border basquete" onclick="Basquete()">
+            <button id="basquete-jogos" class="round-border basquete" onclick="Basquete()">
                 <img src="img/basquete.png">
             </button>
 
-            <button class="btn round-border futsal" onclick="Futsal()">
+            <button id="futsal-jogos" class="round-border futsal" onclick="Futsal()">
                 <img src="img/futsal.png">
             </button>
 
-            <button class="btn round-border volei" onclick="Volei()">
+            <button id="volei-jogos" class="round-border volei" onclick="Volei()">
                 <img src="img/volei.png">
             </button>
 
@@ -117,21 +117,21 @@
         </div>
         <div class="botoes-esporte">
 
-            <button class="btn round-border basquete" onclick="BasqueteTab()">
+            <button id="basquete-tabelas" class="round-border basquete" onclick="BasqueteTab()">
                 <img src="img/basquete.png">
             </button>
 
-            <button class="btn round-border futsal" onclick="FutsalTab()">
+            <button id="futsal-tabelas" class="round-border futsal" onclick="FutsalTab()">
                 <img src="img/futsal.png">
             </button>
 
-            <button class="btn round-border volei" onclick="VoleiTab()">
+            <button id="volei-tabelas" class="round-border volei" onclick="VoleiTab()">
                 <img src="img/volei.png">
             </button>
 
-            <button class="btn round-border volei" onclick="CursosTab()">
-                TOP CURSOS
-            </button>
+            <input type="button" id="top-cursos" value="TOP CURSOS" class="round-border btn botao-amarelo"
+                onclick="CursosTab()">
+
             <input type="button" onclick="jogos();" value="JOGOS" class="round-border btn botao-amarelo">
         </div>
 
