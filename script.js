@@ -895,6 +895,10 @@ function CursosTab() {
   document.getElementById('top-cursos').style =
     'background-color: var(--amarelo)';
 }
+// Avatar
+
+let avatar = "";
+let avatares = ['']
 
 // Troca de Página
 

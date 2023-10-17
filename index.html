@@ -20,7 +20,7 @@
         <div class="card-inicial">
             <div class="card-conteudo">
 
-                <div class="foto-card">
+                <div class="foto-card" onclick="abreAvatares();">
                     <img src="img/add-foto.png">
                 </div>
 
@@ -150,7 +150,15 @@
 
         </div>
     </main>
-
+    <div id="avatares" style="display: none;">
+        <div id="titulo">
+            <h2>Escolha seu avatar</h2>
+            <button onclick="fechaAvatares();" id="close-window">x</button>
+            <div id="options-avatar">
+                 
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 
