@@ -410,7 +410,7 @@ function adiciona() {
     document.querySelector('#curso').value != 'escolha' &&
     (document.querySelector('#basquete').checked ||
       document.querySelector('#volei').checked ||
-      document.querySelector('#futsal').checked) &&
+      document.querySelector('#futsal').checked) && avatar!="" &&
     checaNome(document.querySelector('#nome').value)
   ) {
     let nome = document.querySelector('#nome').value;
@@ -433,17 +433,21 @@ function adiciona() {
     document.querySelector('#volei').checked = false;
     document.querySelector('#basquete').checked = false;
     let div = document.querySelector(".foto-card");
-    let img = document.createElement("img");
-    img.setAttribute("src","img/add-foto.png");
-    div.style = "";
-    div.appendChild(img);
+    if(document.querySelector("#foto-card")==null){
+      let img = document.createElement("img");
+      img.setAttribute("src","img/add-foto.png");
+      img.setAttribute("id","foto-card");
+      div.style = "";
+      div.appendChild(img);
+    }
+    avatar = "";
 
   } else if (
     document.querySelector('#nome').value == '' ||
     document.querySelector('#curso').value == 'escolha' ||
     (!document.querySelector('#basquete').checked &&
       !document.querySelector('#volei').checked &&
-      !document.querySelector('#futsal').checked)
+      !document.querySelector('#futsal').checked) || avatar == ""
   ) {
     alert('Preencha todos os dados');
   } else if (!checaNome(document.querySelector('#nome').value)) {
@@ -452,22 +456,19 @@ function adiciona() {
 }
 
 function comeca(funcao) {
-  if (volei.times.length == 1) {
-    alert('No mínimo dois times');
+  if(funcao == 1){
+    volei = JSON.parse(localStorage.getItem('volei'));
+    futsal = JSON.parse(localStorage.getItem('futsal'));
+    basquete = JSON.parse(localStorage.getItem('basquete'));
+    cursos = JSON.parse(localStorage.getItem('cursos'));
   }
-
-  if (futsal.times.length == 1) {
-    alert('No mínimo dois times');
-  }
-
-  if (basquete.times.length == 1) {
-    alert('No mínimo dois times');
-  }
-
   if (
     volei.times.length != 1 &&
     futsal.times.length != 1 &&
-    basquete.times.length != 1
+    basquete.times.length != 1 && 
+    (volei.times.length > 0 ||
+      futsal.times.length > 0 ||
+      basquete.times.length > 0)
   ) {
     if (funcao == 0) {
       volei.geraJogos('volei');
@@ -477,11 +478,6 @@ function comeca(funcao) {
       localStorage.setItem('futsal', JSON.stringify(futsal));
       localStorage.setItem('basquete', JSON.stringify(basquete));
       localStorage.setItem('cursos', JSON.stringify(cursos));
-    } else {
-      volei = JSON.parse(localStorage.getItem('volei'));
-      futsal = JSON.parse(localStorage.getItem('futsal'));
-      basquete = JSON.parse(localStorage.getItem('basquete'));
-      cursos = JSON.parse(localStorage.getItem('cursos'));
     }
     document.getElementById('inicio').style = 'display: none;';
     document.getElementById('jogos').style = '';
@@ -738,6 +734,16 @@ function comeca(funcao) {
         if (volei.jogos[i].vencedor == ' ') {
           let div = document.createElement('div');
           let div_time_1 = document.createElement('div');
+          let div_time_2 = document.createElement('div');
+          let div_foto_1 = document.createElement('div');
+          let div_foto_2 = document.createElement('div');
+          let time_nome_1 = volei.jogos[i].times[0].nome;
+          let time_nome_2 = volei.jogos[i].times[1].nome;
+
+          let button1 = document.createElement('input');
+          let button2 = document.createElement('input');
+          button1.type = 'button';
+          button2.type = 'button';
           button1.value = 'Vencer';
           button2.value = 'Vencer';
           button1.id = 'btn-volei-' + i + '-0';
@@ -746,11 +752,19 @@ function comeca(funcao) {
           button2.setAttribute('class', 'vencer');
           button1.setAttribute(
             'onclick',
-            "vencer('volei'," + i + ',volei.jogos[' + i + '].times[0].nome)'
+            "vencer('volei'," +
+              i +
+              ',volei.jogos[' +
+              i +
+              '].times[0].nome)'
           );
           button2.setAttribute(
             'onclick',
-            "vencer('volei'," + i + ',volei.jogos[' + i + '].times[1].nome)'
+            "vencer('volei'," +
+              i +
+              ',volei.jogos[' +
+              i +
+              '].times[1].nome)'
           );
 
           let n1 = document.createElement('h3');
@@ -758,9 +772,9 @@ function comeca(funcao) {
           let x = document.createElement('h2');
 
           div_time_1.setAttribute('class', 'time');
+          div_time_2.setAttribute('class', 'time');
           div_foto_1.setAttribute('class', 'foto');
           div_foto_2.setAttribute('class', 'foto');
-          div_time_2.setAttribute('class', 'time');
           div_foto_1.style = "background-image: url(" + volei.jogos[i].times[0].avatar + ");";
           div_foto_2.style = "background-image: url(" + volei.jogos[i].times[1].avatar + ");";
           div.setAttribute('id', 'jogo-volei-' + (i + 1));
@@ -782,9 +796,9 @@ function comeca(funcao) {
         } else {
           let div = document.createElement('div');
           let div_time_1 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
           let div_foto_1 = document.createElement('div');
           let div_foto_2 = document.createElement('div');
+          let div_time_2 = document.createElement('div');
           let time_nome_1 = volei.jogos[i].times[0].nome;
           let time_nome_2 = volei.jogos[i].times[1].nome;
 
@@ -798,6 +812,7 @@ function comeca(funcao) {
           div_foto_2.setAttribute('class', 'foto');
           div_foto_1.style = "background-image: url(" + volei.jogos[i].times[0].avatar + ");";
           div_foto_2.style = "background-image: url(" + volei.jogos[i].times[1].avatar + ");";
+
           div.setAttribute('id', 'jogo-volei-' + (i + 1));
           div.setAttribute('class', 'jogo');
 
@@ -816,6 +831,7 @@ function comeca(funcao) {
           div_time_1.appendChild(div_foto_1);
           div_time_2.appendChild(n2);
           div_time_2.appendChild(div_foto_2);
+
           div.appendChild(div_time_1);
           div.appendChild(x);
           div.appendChild(div_time_2);
@@ -828,6 +844,9 @@ function comeca(funcao) {
       // Aqui dentro colocar "Não houve jogos desta modalidade"
       conteudo.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
     }
+  }
+  else{
+    alert('Você não tem times suficientes para começar!')
   }
 }
 
@@ -949,6 +968,7 @@ function Avatar(foto){
   let div = document.querySelector(".foto-card");
   div.style = "background-image: url(" + foto + ");";
   avatar = foto;
+  fechaAvatares();
 }
 
 // Troca de Página
