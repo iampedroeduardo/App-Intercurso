@@ -738,7 +738,7 @@ function comeca(funcao) {
         if (volei.jogos[i].vencedor == ' ') {
           let div = document.createElement('div');
           let div_time_1 = document.createElement('div');
-…          button1.value = 'Vencer';
+          button1.value = 'Vencer';
           button2.value = 'Vencer';
           button1.id = 'btn-volei-' + i + '-0';
           button2.id = 'btn-volei-' + i + '-1';
