@@ -108,7 +108,7 @@ body {
   height: 100vh;
 }
 
-main {
+.main {
   height: 100%;
   width: 100%;
   display: grid;
@@ -193,6 +193,7 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-position: center;
 }
 .foto-card:hover,
 select:hover {
@@ -301,6 +302,8 @@ select:hover {
   background-color: var(--fundo);
   border-radius: 16px;
   border: 2px var(--texto) solid;
+  background-position: center;
+  background-size: contain;
 }
 
 .vencer {
@@ -428,6 +431,7 @@ th {
 #futsal-div-tab,
 #volei-div-tab,
 #cursos-div-tab {
+  align-self: start;
   margin: 20px 0 20px 0;
   width: 80%;
   border-radius: 16px;
@@ -440,9 +444,88 @@ th {
   --bs-table-bg-type: var(--azul-claro);
   --bs-table-bg: var(--azul);
 }
+/*Avatares*/
+#avatares{
+  position: absolute;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  background-color: var(--laranja);
+  border-radius: 16px;
+  border: 2px var(--texto) solid;
+  padding: 10px;
+}
+
+#titulo{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#titulo button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px var(--texto) solid;
+  border-radius: 16px;
+  background-color: rgb(235, 73, 73);
+}
+.categories{
+  font-weight: 600;
+}
+.fotos{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.vs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 16px;
+  border: 2px var(--texto) solid;
+  background-color: var(--laranja);
+  transition: all .2s;
+}
+.empate:hover {
+  background-color: var(--laranja-shade);
+}
+
+.empatou {
+  background-color: var(--amarelo) !important;
+}
 
 @media (max-width: 900px) {
-  main {
+
+  #basquete-div-tab, #volei-div-tab, #futsal-div-tab, #cursos-div-tab {
+    width: 90%;
+  }
+  tr:first-child th:first-child {
+    font-size: 28px;
+}
+  th {
+    font-size: 18px;
+  }
+  #avatares{
+    height: unset;
+  }
+  .main {
     grid-template-columns: 1fr;
     grid-template-rows: 300px auto auto;
     grid-template-areas:

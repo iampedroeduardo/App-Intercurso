@@ -12,16 +12,16 @@
 </head>
 
 <body>
-    <main id="inicio">
+    <div class="main" id="inicio">
 
         <div class="hero">
-            <img src="img/logo-web.png">
+            <img src="img/logo-web.png" alt="logo">
         </div>
         <div class="card-inicial">
             <div class="card-conteudo">
 
                 <div class="foto-card" onclick="abreAvatares();">
-                    <img src="img/add-foto.png">
+                    <img src="img/add-foto.png" id="foto-card" alt="adicionar foto">
                 </div>
 
                 <label for="nome">Nome:</label>
@@ -45,17 +45,17 @@
                 <div class="botoes-esporte">
                     <input type="checkbox" id="basquete" class="btn-check">
                     <label class="round-border basquete" for="basquete">
-                        <img src="img/basquete.png">
+                        <img src="img/basquete.png" alt="basquete">
                     </label>
 
                     <input type="checkbox" id="futsal" class="btn-check">
                     <label class="round-border futsal" for="futsal">
-                        <img src="img/futsal.png">
+                        <img src="img/futsal.png" alt="futsal">
                     </label>
 
                     <input type="checkbox" id="volei" class="btn-check">
                     <label class="round-border volei" for="volei">
-                        <img src="img/volei.png">
+                        <img src="img/volei.png" alt="volei">
                     </label>
 
                 </div>
@@ -72,24 +72,24 @@
                 value="CARREGAR" class=" round-border btn botao-laranja">
         </div>
 
-    </main>
+    </div>
 
-    <main id="jogos" style="display: none;">
+    <div class="main" id="jogos" style="display: none;">
         <div class="header">
-            <img src="img/logo-web.png">
+            <img src="img/logo-web.png" alt="logo">
         </div>
         <div class="botoes-esporte">
 
             <button id="basquete-jogos" class="round-border basquete" onclick="Basquete()">
-                <img src="img/basquete.png">
+                <img src="img/basquete.png" alt="basquete">
             </button>
 
             <button id="futsal-jogos" class="round-border futsal" onclick="Futsal()">
-                <img src="img/futsal.png">
+                <img src="img/futsal.png" alt="futsal">
             </button>
 
             <button id="volei-jogos" class="round-border volei" onclick="Volei()">
-                <img src="img/volei.png">
+                <img src="img/volei.png" alt="volei">
             </button>
 
             <input type="button" onclick="ranking();" value="RANKING" class="round-border btn botao-amarelo">
@@ -109,27 +109,27 @@
             </div>
         </div>
 
-    </main>
+    </div>
 
-    <main id="tabelas" style="display: none;">
+    <div class="main" id="tabelas" style="display: none;">
         <div class="header">
-            <img src="img/logo-web.png">
+            <img src="img/logo-web.png" alt="logo">
         </div>
         <div class="botoes-esporte">
 
             <button id="basquete-tabelas" class="round-border basquete" onclick="BasqueteTab()">
-                <img src="img/basquete.png">
+                <img src="img/basquete.png" alt="basquete">
             </button>
 
             <button id="futsal-tabelas" class="round-border futsal" onclick="FutsalTab()">
-                <img src="img/futsal.png">
+                <img src="img/futsal.png" alt="futsal">
             </button>
 
             <button id="volei-tabelas" class="round-border volei" onclick="VoleiTab()">
-                <img src="img/volei.png">
+                <img src="img/volei.png" alt="volei">
             </button>
 
-            <input type="button" id="top-cursos" value="TOP CURSOS" class="round-border btn botao-amarelo"
+            <input type="button" id="top-cursos" value="CURSOS" class="round-border btn botao-amarelo"
                 onclick="CursosTab()">
 
             <input type="button" onclick="jogos();" value="JOGOS" class="round-border btn botao-amarelo">
@@ -149,15 +149,45 @@
         <div id="cursos-div-tab" style="display: none;">
 
         </div>
-    </main>
+    </div>
     <div id="avatares" style="display: none;">
         <div id="titulo">
-            <h2>Escolha seu avatar</h2>
-            <button onclick="fechaAvatares();" id="close-window">x</button>
-            <div id="options-avatar">
-                 
-            </div>
+            <h3>Escolha seu avatar</h3>
+            <button onclick="fechaAvatares();">
+                <img src="img/close.png" alt="close">
+            </button>
         </div>
+        <div id="options-avatar">
+            <h3 class="categories">IF</h3>
+            <div class="fotos">
+               <img src="img/if.png" class="foto" onclick="Avatar('img/if.png')" alt="if">
+               <img src="img/ifbranco.png" class="foto" onclick="Avatar('img/ifbranco.png')" alt="if">
+               <img src="img/ifverde.png" class="foto" onclick="Avatar('img/ifverde.png')" alt="if">
+               <img src="img/ifroxo.png" class="foto" onclick="Avatar('img/ifroxo.png')" alt="if">
+               <img src="img/ifazul.png" class="foto" onclick="Avatar('img/ifazul.png')" alt="if">
+            </div>
+            <h3 class="categories">Cursos</h3>
+            <div class="fotos">
+                <img src="img/info.png" class="foto" onclick="Avatar('img/info.png')" alt="informatica">
+                <img src="img/mec.png" class="foto" onclick="Avatar('img/mec.png')" alt="mecanica">
+                <img src="img/auto.png" class="foto" onclick="Avatar('img/auto.png')" alt="automacao">
+                <img src="img/eletro.png" class="foto" onclick="Avatar('img/eletro.png')" alt="eletrotecnica">
+                <img src="img/geo.png" class="foto" onclick="Avatar('img/geo.png')" alt="geoprocessamento">
+                <img src="img/enfermagem.png" class="foto" onclick="Avatar('img/enfermagem.png')" alt="enfermagem">
+                <img src="img/refri.png" class="foto" onclick="Avatar('img/refri.png')" alt="refrigeracao">
+             </div>
+             <h3 class="categories">Orgulho</h3>
+            <div class="fotos">
+                <img src="img/iflgbt.png" class="foto" onclick="Avatar('img/iflgbt.png')" alt="if">
+                <img src="img/infolgbt.png" class="foto" onclick="Avatar('img/infolgbt.png')" alt="informatica">
+                <img src="img/meclgbt.png" class="foto" onclick="Avatar('img/meclgbt.png')" alt="mecanica">
+                <img src="img/autolgbt.png" class="foto" onclick="Avatar('img/autolgbt.png')" alt="automacao">
+                <img src="img/eletrolgbt.png" class="foto" onclick="Avatar('img/eletrolgbt.png')" alt="eletrotecnica">
+                <img src="img/geolgbt.png" class="foto" onclick="Avatar('img/geolgbt.png')" alt="geoprocessamento">
+                <img src="img/enfermagemlgbt.png" class="foto" onclick="Avatar('img/enfermagemlgbt.png')" alt="enfermagem">
+                <img src="img/refrilgbt.png" class="foto" onclick="Avatar('img/refrilgbt.png')" alt="refrigeracao">
+             </div>
+       </div>
     </div>
     <script src="script.js"></script>
 </body>
