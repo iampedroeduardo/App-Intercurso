@@ -624,6 +624,7 @@ function comeca(funcao) {
           let button3 = document.createElement('button');
           let img = document.createElement('img');
           img.setAttribute("src","img/equal.png");
+            img.setAttribute("alt","engual");
           button1.type = 'button';
           button2.type = 'button';
           button1.value = 'Vencer';
