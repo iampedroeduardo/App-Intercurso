@@ -466,9 +466,12 @@ function comeca(funcao) {
     volei.times.length != 1 &&
     futsal.times.length != 1 &&
     basquete.times.length != 1 && 
+    volei.times.length <= 20 &&
+    futsal.times.length <= 20 &&
+    basquete.times.length <= 20 && 
     (volei.times.length > 0 ||
       futsal.times.length > 0 ||
-      basquete.times.length > 0)
+      basquete.times.length > 0) 
   ) {
     if (funcao == 0) {
       volei.geraJogos('volei');
