@@ -512,7 +512,12 @@ th {
 }
 
 @media (max-width: 900px) {
-
+  #avatares{
+    width: 90%;
+    height: unset;
+    top: 5%;
+    left: 5%;
+  }
   #basquete-div-tab, #volei-div-tab, #futsal-div-tab, #cursos-div-tab {
     width: 90%;
   }
@@ -521,9 +526,6 @@ th {
 }
   th {
     font-size: 18px;
-  }
-  #avatares{
-    height: unset;
   }
   .main {
     grid-template-columns: 1fr;
