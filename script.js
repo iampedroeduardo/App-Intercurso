@@ -198,7 +198,6 @@ function criaTabelas() {
     `; 
   }
 }
-//PAREI AQUI
 function checaNome(nome) {
   tof = true;
   for(let l=0;l<3;l++){
@@ -256,9 +255,9 @@ function adiciona() {
       !document.querySelector('#volei').checked &&
       !document.querySelector('#futsal').checked) || avatar == ""
   ) {
-    alert('Preencha todos os dados');
+    abreAlert('Preencha todos os dados');
   } else if (!checaNome(document.querySelector('#nome').value)) {
-    alert('Você já cadastrou um time com esse nome!');
+    abreAlert('Você já cadastrou um time com esse nome!');
   }
 }
 
@@ -355,10 +354,19 @@ function comeca(funcao) {
     }
   }
   else{
-    alert('Você não tem times suficientes para começar!')
+    abreAlert('Você não tem times suficientes para começar!');
   }
 }
 
+function abreAlert(string){
+  let div = document.querySelector(".alert");
+  div.firstElementChild.innerHTML = string;
+  div.style.display = "";
+}
+function fechaAlert(){
+  let div = document.querySelector(".alert");
+  div.style.display = "none";
+}
 // Funções das Modalidades Jogos
 
 function Basquete() {

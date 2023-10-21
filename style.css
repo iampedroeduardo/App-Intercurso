@@ -459,14 +459,14 @@ th {
   padding: 10px;
 }
 
-#titulo{
+.titulo{
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
 }
 
-#titulo button{
+.titulo button{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -511,8 +511,35 @@ th {
 .empatou {
   background-color: var(--amarelo) !important;
 }
-
+.alert{
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  left: 35%;
+  top: 35%;
+  background-color: var(--laranja);
+  border-radius: 16px;
+  border: 2px var(--texto) solid;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.alert input{
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.alert h3{
+  word-wrap: wrap;
+}
 @media (max-width: 900px) {
+  .alert{
+    width: 90vw;
+    left: 5vw;
+
+  }
   #avatares{
     width: 90%;
     height: unset;
@@ -524,7 +551,7 @@ th {
   }
   tr:first-child th:first-child {
     font-size: 28px;
-}
+  }
   th {
     font-size: 18px;
   }
