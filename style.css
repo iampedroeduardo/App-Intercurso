@@ -536,9 +536,10 @@ th {
 }
 @media (max-width: 900px) {
   .alert{
-    width: 90vw;
-    left: 5vw;
-
+    width: 90%;
+    left: 5%;
+    height: 20%;
+    top: 40%;
   }
   #avatares{
     width: 90%;
