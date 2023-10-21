@@ -45,7 +45,7 @@ class Jogo {
     this.times = [];
     this.times.push(time1);
     this.times.push(time2);
-    this.vencedor = ' ';
+    this.vencedor = '';
     this.esporte = esporte;
   }
 }
@@ -60,126 +60,50 @@ class Curso {
 }
 
 function pontos(nome, esporte) {
-  if (esporte == 'volei') {
-    let time;
-    let curso;
-    for (let i = 0; i < volei.times.length; i++) {
-      if (volei.times[i].nome == nome) {
-        volei.times[i].pontos++;
-        time = volei.times[i];
-        volei.times.splice(i, 1);
-        for (let i = 0; i < cursos.length; i++) {
-          if (time.curso == cursos[i].nome) {
-            cursos[i].pontos++;
-            curso = cursos[i];
-            cursos.splice(i, 1);
-            ordenaCursos(curso);
-          }
-        }
+  let time;
+  let curso;
+  for (let i = 0; i < esportes[esporte].times.length; i++) {
+  if (esportes[esporte].times[i].nome == nome) {
+      esportes[esporte].times[i].pontos++;
+      time = esportes[esporte].times[i];
+      esportes[esporte].times.splice(i, 1);
+      for (let i = 0; i < cursos.length; i++) {
+      if (time.curso == cursos[i].nome) {
+          cursos[i].pontos++;
+          curso = cursos[i];
+          cursos.splice(i, 1);
+          ordenaCursos(curso);
       }
-    }
-    volei.times = ordenaTimes(volei, time);
-  }
-
-  if (esporte == 'futsal') {
-    let time;
-    let curso;
-    for (let i = 0; i < futsal.times.length; i++) {
-      if (futsal.times[i].nome == nome) {
-        futsal.times[i].pontos++;
-        time = futsal.times[i];
-        futsal.times.splice(i, 1);
-        for (let i = 0; i < cursos.length; i++) {
-          if (time.curso == cursos[i].nome) {
-            cursos[i].pontos++;
-            curso = cursos[i];
-            cursos.splice(i, 1);
-            ordenaCursos(curso);
-          }
-        }
       }
-    }
-    futsal.times = ordenaTimes(futsal, time);
   }
-
-  if (esporte == 'basquete') {
-    let time;
-    let curso;
-    for (let i = 0; i < basquete.times.length; i++) {
-      if (basquete.times[i].nome == nome) {
-        basquete.times[i].pontos++;
-        time = basquete.times[i];
-        basquete.times.splice(i, 1);
-        for (let i = 0; i < cursos.length; i++) {
-          if (time.curso == cursos[i].nome) {
-            cursos[i].pontos++;
-            curso = cursos[i];
-            cursos.splice(i, 1);
-            ordenaCursos(curso);
-          }
-        }
-      }
-    }
-    basquete.times = ordenaTimes(basquete, time);
   }
+  esportes[esporte].times = ordenaTimes(esportes[esporte], time);
 }
 
 function vencer(esporte, jogo, resultado) {
-  if (esporte == 'volei') {
-    volei.jogos[jogo].vencedor = resultado;
-    let botao1 = document.querySelector('#btn-volei-' + jogo + '-0');
-    botao1.remove();
-    let botao2 = document.querySelector('#btn-volei-' + jogo + '-1');
-    botao2.remove();
-    let div = document.querySelector('#jogo-volei-' + (jogo + 1));
-    if (resultado == volei.jogos[jogo].times[0].nome) {
-      div.firstChild.firstChild.setAttribute('class', 'vencedor');
-      div.lastChild.firstChild.setAttribute('class', 'perdedor');
-    } else if (resultado == volei.jogos[jogo].times[1].nome){
-      div.lastChild.firstChild.setAttribute('class', 'vencedor');
-      div.firstChild.firstChild.setAttribute('class', 'perdedor');
-    }
-    pontos(resultado, esporte);
-  } else if (esporte == 'basquete') {
-    basquete.jogos[jogo].vencedor = resultado;
-    let botao1 = document.querySelector('#btn-basquete-' + jogo + '-0');
-    botao1.remove();
-    let botao2 = document.querySelector('#btn-basquete-' + jogo + '-1');
-    botao2.remove();
-    let div = document.querySelector('#jogo-basquete-' + (jogo + 1));
-    if (resultado == basquete.jogos[jogo].times[0].nome) {
-      div.firstChild.firstChild.setAttribute('class', 'vencedor');
-      div.lastChild.firstChild.setAttribute('class', 'perdedor');
-    } else {
-      div.lastChild.firstChild.setAttribute('class', 'vencedor');
-      div.firstChild.firstChild.setAttribute('class', 'perdedor');
-    }
-    pontos(resultado, esporte);
-  } else if (esporte == 'futsal') {
-    futsal.jogos[jogo].vencedor = resultado;
-    let botao1 = document.querySelector('#btn-futsal-' + jogo + '-0');
-    botao1.remove();
-    let botao2 = document.querySelector('#btn-futsal-' + jogo + '-1');
-    botao2.remove();
-    let botao3 = document.querySelector('#btn-futsal-' + jogo + '-empate');
+  esportes[esporte].jogos[jogo].vencedor = resultado;
+  let botao1 = document.querySelector(`#btn-${esporte}-${jogo}-0`);
+  botao1.remove();
+  let botao2 = document.querySelector(`#btn-${esporte}-${jogo}-1`);
+  botao2.remove();
+  if(esporte == 1){
+    let botao3 = document.querySelector(`#btn-${esporte}-${jogo}-empate`);
     botao3.remove();
-    let div = document.querySelector('#jogo-futsal-' + (jogo + 1));
-    if (resultado == futsal.jogos[jogo].times[0].nome) {
-      div.firstChild.firstChild.setAttribute('class', 'vencedor');
-      div.lastChild.firstChild.setAttribute('class', 'perdedor');
-      pontos(resultado, esporte);
-    } else if (resultado == futsal.jogos[jogo].times[1].nome){
-      div.lastChild.firstChild.setAttribute('class', 'vencedor');
-      div.firstChild.firstChild.setAttribute('class', 'perdedor');
-      pontos(resultado, esporte);
-    } else {
-      div.lastChild.firstChild.setAttribute('class', 'empatou');
-      div.firstChild.firstChild.setAttribute('class', 'empatou');
-    }
   }
-  localStorage.setItem('volei', JSON.stringify(volei));
-  localStorage.setItem('futsal', JSON.stringify(futsal));
-  localStorage.setItem('basquete', JSON.stringify(basquete));
+  let div = document.querySelector(`#jogo-${esporte}-${jogo+1}`);
+  if (resultado == esportes[esporte].jogos[jogo].times[0].nome) {
+    div.firstElementChild.firstElementChild.setAttribute('class', 'vencedor');
+    div.lastElementChild.firstElementChild.setAttribute('class', 'perdedor');
+  } else if (resultado == esportes[esporte].jogos[jogo].times[1].nome){
+    div.lastElementChild.firstElementChild.setAttribute('class', 'vencedor');
+    div.firstElementChild.firstElementChild.setAttribute('class', 'perdedor');
+  } else {
+    div.lastElementChild.firstElementChild.setAttribute('class', 'empatou');
+    div.firstElementChild.firstElementChild.setAttribute('class', 'empatou');
+  }
+
+  pontos(resultado, esporte);
+  localStorage.setItem('esportes', JSON.stringify(esportes));
   localStorage.setItem('cursos', JSON.stringify(cursos));
 }
 
@@ -205,142 +129,42 @@ function ordenaTimes(esporte, time) {
 }
 
 function criaTabelas() {
-  if (basquete.times.length != 0) {
-    let div = document.querySelector('#basquete-div-tab');
-    div.innerHTML = `<table class = "table table-striped" id = "tab-basquete">
-    <tbody id="tbody-basquete">
-            <tr>
-                <th colspan = 3>Basquete</th>
-            </tr>
-            <tr>
-                <th>Lugar</th>
-                <th>Times</th>
-                <th>Pontos</th>
-            </tr>
-            </tbody>
-        </table>`;
-    let posicao;
-    for (let i = 0; i < basquete.times.length; i++) {
-      let tabela = document.querySelector('#tbody-basquete');
-      let tr = document.createElement('tr');
-      let td_class = document.createElement('td');
-      let td_times = document.createElement('td');
-      let td_pontos = document.createElement('td');
-      if (i > 0) {
-        if (basquete.times[i].pontos == basquete.times[i - 1].pontos) {
-          td_class.innerHTML = posicao;
+  for(let l=0;l<3;l++){
+    let div = document.querySelector(`#${esportes[l].nome}-div-tab`);
+    if (esportes[l].times.length != 0) {
+      div.innerHTML = `<table class = "table table-striped" id = "tab-${esportes[l].nome}">
+      <tbody id="tbody-${esportes[l].nome}">
+              <tr>
+                  <th colspan = 3>${esportes[l].nome[0].toUpperCase()}${esportes[l].nome.substring(1)}</th>
+              </tr>
+              <tr>
+                  <th>Lugar</th>
+                  <th>Times</th>
+                  <th>Pontos</th>
+              </tr>
+              </tbody>
+      </table>`;
+      let posicao;
+      for (let i = 0; i < esportes[l].times.length; i++) {
+        let tabela = document.querySelector(`#tbody-${esportes[l].nome}`);
+        if (i > 0) {
+          if (!(esportes[l].times[i].pontos == esportes[l].times[i - 1].pontos)) {
+            posicao = i + 1;
+          }
         } else {
           posicao = i + 1;
-          td_class.innerHTML = posicao;
         }
-      } else {
-        posicao = i + 1;
-        td_class.innerHTML = posicao;
+        tabela.innerHTML +=`
+        <tr>
+          <td>${posicao}</td>
+          <td>${esportes[l].times[i].nome}</td>
+          <td>${esportes[l].times[i].pontos}</td>
+        </tr>
+        `;
       }
-
-      td_times.innerHTML = basquete.times[i].nome;
-      td_pontos.innerHTML = basquete.times[i].pontos;
-
-      tr.appendChild(td_class);
-      tr.appendChild(td_times);
-      tr.appendChild(td_pontos);
-      tabela.appendChild(tr);
+    } else {
+      div.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
     }
-  } else {
-    let div = document.querySelector('#basquete-div-tab');
-    div.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
-  }
-
-  if (futsal.times.length != 0) {
-    let div = document.querySelector('#futsal-div-tab');
-    div.innerHTML = `<table class = "table table-striped" id = "tab-futsal">
-    <tbody id="tbody-futsal">
-            <tr>
-                <th colspan = 3>Futsal</th>
-            </tr>
-            <tr>
-                <th>Lugar</th>
-                <th>Times</th>
-                <th>Pontos</th>
-            </tr>
-            </tbody>
-        </table>`;
-    let posicao;
-    for (let i = 0; i < futsal.times.length; i++) {
-      let tabela = document.querySelector('#tbody-futsal');
-      let tr = document.createElement('tr');
-      let td_class = document.createElement('td');
-      let td_times = document.createElement('td');
-      let td_pontos = document.createElement('td');
-      if (i > 0) {
-        if (futsal.times[i].pontos == futsal.times[i - 1].pontos) {
-          td_class.innerHTML = posicao;
-        } else {
-          posicao = i + 1;
-          td_class.innerHTML = posicao;
-        }
-      } else {
-        posicao = i + 1;
-        td_class.innerHTML = posicao;
-      }
-
-      td_times.innerHTML = futsal.times[i].nome;
-      td_pontos.innerHTML = futsal.times[i].pontos;
-
-      tr.appendChild(td_class);
-      tr.appendChild(td_times);
-      tr.appendChild(td_pontos);
-      tabela.appendChild(tr);
-    }
-  } else {
-    let div = document.querySelector('#futsal-div-tab');
-    div.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
-  }
-
-  if (volei.times.length != 0) {
-    let div = document.querySelector('#volei-div-tab');
-    div.innerHTML = `<table class = "table table-striped" id = "tab-volei">
-    <tbody id="tbody-volei">
-            <tr>
-                <th colspan = 3>Volei</th>
-            </tr>
-            <tr>
-                <th>Lugar</th>
-                <th>Times</th>
-                <th>Pontos</th>
-            </tr>
-            </tbody>
-        </table>`;
-    let posicao;
-    for (let i = 0; i < volei.times.length; i++) {
-      let tabela = document.querySelector('#tbody-volei');
-      let tr = document.createElement('tr');
-      let td_class = document.createElement('td');
-      let td_times = document.createElement('td');
-      let td_pontos = document.createElement('td');
-      if (i > 0) {
-        if (volei.times[i].pontos == volei.times[i - 1].pontos) {
-          td_class.innerHTML = posicao;
-        } else {
-          posicao = i + 1;
-          td_class.innerHTML = posicao;
-        }
-      } else {
-        posicao = i + 1;
-        td_class.innerHTML = posicao;
-      }
-
-      td_times.innerHTML = volei.times[i].nome;
-      td_pontos.innerHTML = volei.times[i].pontos;
-
-      tr.appendChild(td_class);
-      tr.appendChild(td_times);
-      tr.appendChild(td_pontos);
-      tabela.appendChild(tr);
-    }
-  } else {
-    let div = document.querySelector('#volei-div-tab');
-    div.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
   }
   let div = document.querySelector('#cursos-div-tab');
   div.innerHTML = `<table class = "table table-striped" id = "tab-cursos">
@@ -358,47 +182,30 @@ function criaTabelas() {
   let posicao;
   for (let i = 0; i < cursos.length; i++) {
     let tabela = document.querySelector('#tbody-cursos');
-    let tr = document.createElement('tr');
-    let td_class = document.createElement('td');
-    let td_times = document.createElement('td');
-    let td_pontos = document.createElement('td');
     if (i > 0) {
-      if (cursos[i].pontos == cursos[i - 1].pontos) {
-        td_class.innerHTML = posicao;
-      } else {
-        posicao = i + 1;
-        td_class.innerHTML = posicao;
+      if (!(cursos[i].pontos == cursos[i - 1].pontos)) {
+          posicao = i + 1;
       }
     } else {
       posicao = i + 1;
-      td_class.innerHTML = posicao;
     }
-
-    td_times.innerHTML = cursos[i].nome;
-    td_pontos.innerHTML = cursos[i].pontos;
-
-    tr.appendChild(td_class);
-    tr.appendChild(td_times);
-    tr.appendChild(td_pontos);
-    tabela.appendChild(tr);
+    tabela.innerHTML += `
+      <tr>
+          <td>${posicao}</td>
+          <td>${cursos[i].nome}</td>
+          <td>${cursos[i].pontos}</td>
+      </tr>
+    `; 
   }
 }
-
+//PAREI AQUI
 function checaNome(nome) {
   tof = true;
-  for (let i = 0; i < basquete.times.length; i++) {
-    if (basquete.times[i].nome == nome) {
-      tof = false;
-    }
-  }
-  for (let i = 0; i < volei.times.length; i++) {
-    if (volei.times[i].nome == nome) {
-      tof = false;
-    }
-  }
-  for (let i = 0; i < futsal.times.length; i++) {
-    if (futsal.times[i].nome == nome) {
-      tof = false;
+  for(let l=0;l<3;l++){
+    for (let i = 0; i < esportes[l].times.length; i++) {
+      if (esportes[l].times[i].nome == nome) {
+        tof = false;
+      }
     }
   }
   return tof;
@@ -417,15 +224,15 @@ function adiciona() {
     let curso = document.querySelector('#curso').value;
     if (document.querySelector('#basquete').checked) {
       let time = new Time(nome, curso, 'basquete',avatar);
-      basquete.adicionaTime(time);
-    }
-    if (document.querySelector('#volei').checked) {
-      let time = new Time(nome, curso, 'volei', avatar);
-      volei.adicionaTime(time);
+      esportes[0].adicionaTime(time);
     }
     if (document.querySelector('#futsal').checked) {
       let time = new Time(nome, curso, 'futsal', avatar);
-      futsal.adicionaTime(time);
+      esportes[1].adicionaTime(time);
+    }
+    if (document.querySelector('#volei').checked) {
+      let time = new Time(nome, curso, 'volei', avatar);
+      esportes[2].adicionaTime(time);
     }
     document.querySelector('#nome').value = '';
     document.querySelector('#curso').value = 'escolha';
@@ -457,396 +264,94 @@ function adiciona() {
 
 function comeca(funcao) {
   if(funcao == 1){
-    volei = JSON.parse(localStorage.getItem('volei'));
-    futsal = JSON.parse(localStorage.getItem('futsal'));
-    basquete = JSON.parse(localStorage.getItem('basquete'));
+    esportes = JSON.parse(localStorage.getItem('esportes'));
     cursos = JSON.parse(localStorage.getItem('cursos'));
   }
   if (
-    volei.times.length != 1 &&
-    futsal.times.length != 1 &&
-    basquete.times.length != 1 && 
-    volei.times.length <= 20 &&
-    futsal.times.length <= 20 &&
-    basquete.times.length <= 20 && 
-    (volei.times.length > 0 ||
-      futsal.times.length > 0 ||
-      basquete.times.length > 0) 
+    esportes[0].times.length != 1 &&
+    esportes[1].times.length != 1 &&
+    esportes[2].times.length != 1 && 
+    esportes[0].times.length <= 20 &&
+    esportes[1].times.length <= 20 &&
+    esportes[2].times.length <= 20 && 
+    (esportes[0].times.length > 0 ||
+      esportes[1].times.length > 0 ||
+      esportes[2].times.length > 0) 
   ) {
     if (funcao == 0) {
-      volei.geraJogos('volei');
-      futsal.geraJogos('futsal');
-      basquete.geraJogos('basquete');
-      localStorage.setItem('volei', JSON.stringify(volei));
-      localStorage.setItem('futsal', JSON.stringify(futsal));
-      localStorage.setItem('basquete', JSON.stringify(basquete));
+      esportes[0].geraJogos('basquete');
+      esportes[1].geraJogos('futsal');
+      esportes[2].geraJogos('volei');
+      localStorage.setItem('esportes', JSON.stringify(esportes));
       localStorage.setItem('cursos', JSON.stringify(cursos));
     }
     document.getElementById('inicio').style = 'display: none;';
     document.getElementById('jogos').style = '';
 
     // Cria Jogos
-
-    if (basquete.times.length != 0) {
-      let conteudo = document.getElementById('basquete-div');
-
-      for (let i = 0; i < basquete.jogos.length; i++) {
-        if (basquete.jogos[i].vencedor == ' ') {
-          let div = document.createElement('div');
-          let div_time_1 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
-          let div_foto_1 = document.createElement('div');
-          let div_foto_2 = document.createElement('div');
-          let time_nome_1 = basquete.jogos[i].times[0].nome;
-          let time_nome_2 = basquete.jogos[i].times[1].nome;
-
-          let button1 = document.createElement('input');
-          let button2 = document.createElement('input');
-          button1.type = 'button';
-          button2.type = 'button';
-          button1.value = 'Vencer';
-          button2.value = 'Vencer';
-          button1.id = 'btn-basquete-' + i + '-0';
-          button2.id = 'btn-basquete-' + i + '-1';
-          button1.setAttribute('class', 'vencer');
-          button2.setAttribute('class', 'vencer');
-          button1.setAttribute(
-            'onclick',
-            "vencer('basquete'," +
-              i +
-              ',basquete.jogos[' +
-              i +
-              '].times[0].nome)'
-          );
-          button2.setAttribute(
-            'onclick',
-            "vencer('basquete'," +
-              i +
-              ',basquete.jogos[' +
-              i +
-              '].times[1].nome)'
-          );
-
-          let n1 = document.createElement('h3');
-          let n2 = document.createElement('h3');
-          let x = document.createElement('h2');
-
-          div_time_1.setAttribute('class', 'time');
-          div_time_2.setAttribute('class', 'time');
-          div_foto_1.setAttribute('class', 'foto');
-          div_foto_2.setAttribute('class', 'foto');
-          div_foto_1.style = "background-image: url(" + basquete.jogos[i].times[0].avatar + ");";
-          div_foto_2.style = "background-image: url(" + basquete.jogos[i].times[1].avatar + ");";
-          div.setAttribute('id', 'jogo-basquete-' + (i + 1));
-          div.setAttribute('class', 'jogo');
-
-          n1.innerHTML = time_nome_1;
-          n2.innerHTML = time_nome_2;
-          x.innerHTML = 'VS';
-          div_time_1.appendChild(n1);
-          div_time_1.appendChild(div_foto_1);
-          div_time_1.appendChild(button1);
-          div_time_2.appendChild(n2);
-          div_time_2.appendChild(div_foto_2);
-          div_time_2.appendChild(button2);
-          div.appendChild(div_time_1);
-          div.appendChild(x);
-          div.appendChild(div_time_2);
-          conteudo.appendChild(div);
-        } else {
-          let div = document.createElement('div');
-          let div_time_1 = document.createElement('div');
-          let div_foto_1 = document.createElement('div');
-          let div_foto_2 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
-          let time_nome_1 = basquete.jogos[i].times[0].nome;
-          let time_nome_2 = basquete.jogos[i].times[1].nome;
-
-          let n1 = document.createElement('h3');
-          let n2 = document.createElement('h3');
-          let x = document.createElement('h2');
-
-          div_time_1.setAttribute('class', 'time');
-          div_time_2.setAttribute('class', 'time');
-          div_foto_1.setAttribute('class', 'foto');
-          div_foto_2.setAttribute('class', 'foto');
-          div_foto_1.style = "background-image: url(" + basquete.jogos[i].times[0].avatar + ");";
-          div_foto_2.style = "background-image: url(" + basquete.jogos[i].times[1].avatar + ");";
-
-          div.setAttribute('id', 'jogo-basquete-' + (i + 1));
-          div.setAttribute('class', 'jogo');
-
-          if (basquete.jogos[i].vencedor == basquete.jogos[i].times[0].nome) {
-            n1.setAttribute('class', 'vencedor');
-            n2.setAttribute('class', 'perdedor');
-          } else {
-            n2.setAttribute('class', 'vencedor');
-            n1.setAttribute('class', 'perdedor');
+    for(let l=0;l<3;l++){
+      let conteudo = document.getElementById(`${esportes[l].nome}-div`);
+      if (esportes[l].times.length != 0) {
+        for (let i = 0; i < esportes[l].jogos.length; i++) {
+          conteudo.innerHTML += `
+          <div class="jogo" id="jogo-${l}-${i+1}">
+            <div class="time">
+              <h3>${esportes[l].jogos[i].times[0].nome}</h3>
+              <div class="foto" style="background-image:url('${esportes[l].jogos[i].times[0].avatar}');"></div>
+              <input type="button" value="Vencer" id="btn-${l}-${i}-0" class="vencer" onclick="vencer(${l},${i},'${esportes[l].jogos[i].times[0].nome}')">
+            </div>
+            <div class="vs">
+              <h2>VS</h2>
+            </div>
+            <div class="time">
+              <h3>${esportes[l].jogos[i].times[1].nome}</h3>
+              <div class="foto" style="background-image:url('${esportes[l].jogos[i].times[1].avatar}');"></div>
+              <input type="button" value="Vencer" id="btn-${l}-${i}-1" class="vencer" onclick="vencer(${l},${i},'${esportes[l].jogos[i].times[1].nome}')">
+            </div>
+          </div>`
+          if(l == 1){
+            vs = document.querySelector(`#jogo-${l}-${i+1} .vs`);
+            vs.innerHTML += `<button id="btn-${l}-${i}-empate" class="empate" onclick="vencer(${l},${i},'empate')"><img src="img/equal.png" alt="engual"></button>`
           }
-
-          n1.innerHTML = time_nome_1;
-          n2.innerHTML = time_nome_2;
-          x.innerHTML = 'VS';
-          div_time_1.appendChild(n1);
-          div_time_1.appendChild(div_foto_1);
-          div_time_2.appendChild(n2);
-          div_time_2.appendChild(div_foto_2);
-
-          div.appendChild(div_time_1);
-          div.appendChild(x);
-          div.appendChild(div_time_2);
-          conteudo.appendChild(div);
-        }
-      }
-    } else {
-      let conteudo = document.getElementById('basquete-div');
-
-      // Aqui dentro colocar "Não houve jogos desta modalidade"
-      conteudo.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
-    }
-
-    if (futsal.times.length != 0) {
-      let conteudo = document.getElementById('futsal-div');
-
-      for (let i = 0; i < futsal.jogos.length; i++) {
-        if (futsal.jogos[i].vencedor == ' ') {
-          let div = document.createElement('div');
-          let div_time_1 = document.createElement('div');
-          let div_foto_1 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
-          let div_foto_2 = document.createElement('div');
-          let div_vs = document.createElement('div');
-          let time_nome_1 = futsal.jogos[i].times[0].nome;
-          let time_nome_2 = futsal.jogos[i].times[1].nome;
-
-          let button1 = document.createElement('input');
-          let button2 = document.createElement('input');
-          let button3 = document.createElement('button');
-          let img = document.createElement('img');
-          img.setAttribute("src","img/equal.png");
-            img.setAttribute("alt","engual");
-          button1.type = 'button';
-          button2.type = 'button';
-          button1.value = 'Vencer';
-          button2.value = 'Vencer';
-          button3.appendChild(img);
-          button1.id = 'btn-futsal-' + i + '-0';
-          button2.id = 'btn-futsal-' + i + '-1';
-          button3.id = 'btn-futsal-' + i + '-empate';
-          button1.setAttribute('class', 'vencer');
-          button2.setAttribute('class', 'vencer');
-          button3.setAttribute('class', 'empate');
-          button1.setAttribute(
-            'onclick',
-            "vencer('futsal'," + i + ',futsal.jogos[' + i + '].times[0].nome)'
-          );
-          button2.setAttribute(
-            'onclick',
-            "vencer('futsal'," + i + ',futsal.jogos[' + i + '].times[1].nome)'
-          );
-          button3.setAttribute(
-            'onclick',
-            "vencer('futsal'," + i + ',"empate")'
-          );
-
-          let n1 = document.createElement('h3');
-          let n2 = document.createElement('h3');
-          let x = document.createElement('h2');
-
-          div_time_1.setAttribute('class', 'time');
-          div_time_2.setAttribute('class', 'time');
-          div_foto_1.setAttribute('class', 'foto');
-          div_foto_2.setAttribute('class', 'foto');
-          div_vs.setAttribute('class','vs')
-          div_foto_1.style = "background-image: url(" + futsal.jogos[i].times[0].avatar + ");";
-          div_foto_2.style = "background-image: url(" + futsal.jogos[i].times[1].avatar + ");";
-          div.setAttribute('id', 'jogo-futsal-' + (i + 1));
-          div.setAttribute('class', 'jogo');
-
-          n1.innerHTML = time_nome_1;
-          n2.innerHTML = time_nome_2;
-          x.innerHTML = 'VS';
-          div_time_1.appendChild(n1);
-          div_time_1.appendChild(div_foto_1);
-          div_time_1.appendChild(button1);
-          div_time_2.appendChild(n2);
-          div_time_2.appendChild(div_foto_2);
-          div_time_2.appendChild(button2);
-          div_vs.appendChild(x);
-          div_vs.appendChild(button3);
-          div.appendChild(div_time_1);
-          div.appendChild(div_vs);
-          div.appendChild(div_time_2);
-          conteudo.appendChild(div);
-        } else {
-          let div = document.createElement('div');
-          let div_time_1 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
-          let div_foto_1 = document.createElement('div');
-          let div_foto_2 = document.createElement('div');
-          let time_nome_1 = futsal.jogos[i].times[0].nome;
-          let time_nome_2 = futsal.jogos[i].times[1].nome;
-
-          let n1 = document.createElement('h3');
-          let n2 = document.createElement('h3');
-          let x = document.createElement('h2');
-
-          div_time_1.setAttribute('class', 'time');
-          div_time_2.setAttribute('class', 'time');
-          div_foto_1.setAttribute('class', 'foto');
-          div_foto_2.setAttribute('class', 'foto');
-          div_foto_1.style = "background-image: url(" + futsal.jogos[i].times[0].avatar + ");";
-          div_foto_2.style = "background-image: url(" + futsal.jogos[i].times[1].avatar + ");";
-          div.setAttribute('id', 'jogo-futsal-' + (i + 1));
-          div.setAttribute('class', 'jogo');
-
-          if (futsal.jogos[i].vencedor == futsal.jogos[i].times[0].nome) {
-            n1.setAttribute('class', 'vencedor');
-            n2.setAttribute('class', 'perdedor');
-          } else if (futsal.jogos[i].vencedor == futsal.jogos[i].times[1].nome){
-            n2.setAttribute('class', 'vencedor');
-            n1.setAttribute('class', 'perdedor');
-          } else {
-            n1.setAttribute('class', 'empatou');
-            n2.setAttribute('class', 'empatou');
+          if(esportes[l].jogos[i].vencedor == esportes[l].jogos[i].times[0].nome){
+            botao1 = document.querySelector(`#btn-${l}-${i}-0`);
+            botao1.remove();
+            botao2 = document.querySelector(`#btn-${l}-${i}-1`);
+            botao2.remove();
+            if(l == 1){
+              botao3 = document.querySelector(`#btn-${l}-${i}-empate`);
+              botao3.remove();
+            }
+            div = document.querySelector(`#jogo-${l}-${i+1}`);
+            div.firstElementChild.firstElementChild.setAttribute('class', 'vencedor');
+            div.lastElementChild.firstElementChild.setAttribute('class', 'perdedor');
+          } else if(esportes[l].jogos[i].vencedor == esportes[l].jogos[i].times[1].nome){
+            botao1 = document.querySelector(`#btn-${l}-${i}-0`);
+            botao1.remove();
+            botao2 = document.querySelector(`#btn-${l}-${i}-1`);
+            botao2.remove();
+            if(l == 1){
+              botao3 = document.querySelector(`#btn-${l}-${i}-empate`);
+              botao3.remove();
+            }
+            div = document.querySelector(`#jogo-${l}-${i+1}`);
+            div.lastElementChild.firstElementChild.setAttribute('class', 'vencedor');
+            div.firstElementChild.firstElementChild.setAttribute('class', 'perdedor');
+          } else if(esportes[l].jogos[i].vencedor == "empate"){
+            botao1 = document.querySelector(`#btn-${l}-${i}-0`);
+            botao1.remove();
+            botao2 = document.querySelector(`#btn-${l}-${i}-1`);
+            botao2.remove();
+            botao3 = document.querySelector(`#btn-${l}-${i}-empate`);
+            botao3.remove();
+            div = document.querySelector(`#jogo-${l}-${i+1}`);
+            div.lastElementChild.firstElementChild.setAttribute('class', 'empatou');
+            div.firstElementChild.firstElementChild.setAttribute('class', 'empatou');
           }
-
-          n1.innerHTML = time_nome_1;
-          n2.innerHTML = time_nome_2;
-          x.innerHTML = 'VS';
-          div_time_1.appendChild(n1);
-          div_time_1.appendChild(div_foto_1);
-          div_time_2.appendChild(n2);
-          div_time_2.appendChild(div_foto_2);
-          div.appendChild(div_time_1);
-          div.appendChild(x);
-          div.appendChild(div_time_2);
-          conteudo.appendChild(div);
         }
+      } else {
+        conteudo.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
       }
-    } else {
-      let conteudo = document.getElementById('futsal-div');
-
-      // Aqui dentro colocar "Não houve jogos desta modalidade"
-      conteudo.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
-    }
-
-    if (volei.times.length != 0) {
-      let conteudo = document.getElementById('volei-div');
-
-      for (let i = 0; i < volei.jogos.length; i++) {
-        if (volei.jogos[i].vencedor == ' ') {
-          let div = document.createElement('div');
-          let div_time_1 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
-          let div_foto_1 = document.createElement('div');
-          let div_foto_2 = document.createElement('div');
-          let time_nome_1 = volei.jogos[i].times[0].nome;
-          let time_nome_2 = volei.jogos[i].times[1].nome;
-
-          let button1 = document.createElement('input');
-          let button2 = document.createElement('input');
-          button1.type = 'button';
-          button2.type = 'button';
-          button1.value = 'Vencer';
-          button2.value = 'Vencer';
-          button1.id = 'btn-volei-' + i + '-0';
-          button2.id = 'btn-volei-' + i + '-1';
-          button1.setAttribute('class', 'vencer');
-          button2.setAttribute('class', 'vencer');
-          button1.setAttribute(
-            'onclick',
-            "vencer('volei'," +
-              i +
-              ',volei.jogos[' +
-              i +
-              '].times[0].nome)'
-          );
-          button2.setAttribute(
-            'onclick',
-            "vencer('volei'," +
-              i +
-              ',volei.jogos[' +
-              i +
-              '].times[1].nome)'
-          );
-
-          let n1 = document.createElement('h3');
-          let n2 = document.createElement('h3');
-          let x = document.createElement('h2');
-
-          div_time_1.setAttribute('class', 'time');
-          div_time_2.setAttribute('class', 'time');
-          div_foto_1.setAttribute('class', 'foto');
-          div_foto_2.setAttribute('class', 'foto');
-          div_foto_1.style = "background-image: url(" + volei.jogos[i].times[0].avatar + ");";
-          div_foto_2.style = "background-image: url(" + volei.jogos[i].times[1].avatar + ");";
-          div.setAttribute('id', 'jogo-volei-' + (i + 1));
-          div.setAttribute('class', 'jogo');
-
-          n1.innerHTML = time_nome_1;
-          n2.innerHTML = time_nome_2;
-          x.innerHTML = 'VS';
-          div_time_1.appendChild(n1);
-          div_time_1.appendChild(div_foto_1);
-          div_time_1.appendChild(button1);
-          div_time_2.appendChild(n2);
-          div_time_2.appendChild(div_foto_2);
-          div_time_2.appendChild(button2);
-          div.appendChild(div_time_1);
-          div.appendChild(x);
-          div.appendChild(div_time_2);
-          conteudo.appendChild(div);
-        } else {
-          let div = document.createElement('div');
-          let div_time_1 = document.createElement('div');
-          let div_foto_1 = document.createElement('div');
-          let div_foto_2 = document.createElement('div');
-          let div_time_2 = document.createElement('div');
-          let time_nome_1 = volei.jogos[i].times[0].nome;
-          let time_nome_2 = volei.jogos[i].times[1].nome;
-
-          let n1 = document.createElement('h3');
-          let n2 = document.createElement('h3');
-          let x = document.createElement('h2');
-
-          div_time_1.setAttribute('class', 'time');
-          div_time_2.setAttribute('class', 'time');
-          div_foto_1.setAttribute('class', 'foto');
-          div_foto_2.setAttribute('class', 'foto');
-          div_foto_1.style = "background-image: url(" + volei.jogos[i].times[0].avatar + ");";
-          div_foto_2.style = "background-image: url(" + volei.jogos[i].times[1].avatar + ");";
-
-          div.setAttribute('id', 'jogo-volei-' + (i + 1));
-          div.setAttribute('class', 'jogo');
-
-          if (volei.jogos[i].vencedor == volei.jogos[i].times[0].nome) {
-            n1.setAttribute('class', 'vencedor');
-            n2.setAttribute('class', 'perdedor');
-          } else {
-            n2.setAttribute('class', 'vencedor');
-            n1.setAttribute('class', 'perdedor');
-          }
-
-          n1.innerHTML = time_nome_1;
-          n2.innerHTML = time_nome_2;
-          x.innerHTML = 'VS';
-          div_time_1.appendChild(n1);
-          div_time_1.appendChild(div_foto_1);
-          div_time_2.appendChild(n2);
-          div_time_2.appendChild(div_foto_2);
-
-          div.appendChild(div_time_1);
-          div.appendChild(x);
-          div.appendChild(div_time_2);
-          conteudo.appendChild(div);
-        }
-      }
-    } else {
-      let conteudo = document.getElementById('volei-div');
-
-      // Aqui dentro colocar "Não houve jogos desta modalidade"
-      conteudo.innerHTML = '<h2> Não houve jogos desta modalidade </h2>';
     }
   }
   else{
@@ -990,10 +495,10 @@ function jogos() {
 
 //Modalidades
 
-let volei = new Esporte('Volei');
-let futsal = new Esporte('Futsal');
-let basquete = new Esporte('Basquete');
-
+let volei = new Esporte('volei');
+let futsal = new Esporte('futsal');
+let basquete = new Esporte('basquete');
+let esportes = [basquete,futsal,volei];
 //Cursos
 
 let info = new Curso('Informática para Internet');
