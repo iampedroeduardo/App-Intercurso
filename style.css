@@ -512,7 +512,7 @@ th {
   background-color: var(--amarelo) !important;
 }
 .alert{
-  position: absolute;
+  position: fixed;
   width: 30%;
   height: 30%;
   left: 35%;
